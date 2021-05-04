@@ -1,6 +1,8 @@
 package com.appnutricare.controller;
 
+import com.appnutricare.entities.Nutritionist;
 import com.appnutricare.entities.Recipe;
+import com.appnutricare.service.INutritionistService;
 import com.appnutricare.service.IRecipeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -23,6 +25,8 @@ public class RecipeController {
 
     @Autowired
     private IRecipeService recipeService;
+    @Autowired
+    private INutritionistService nutritionistService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Listar Bookings", notes="Método para listar todos los bookings")
@@ -60,18 +64,18 @@ public class RecipeController {
         }
     }
 
-    /*
+
     @PostMapping(value ="/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Registro de un Recipe de un Customer", notes ="Método que registra un booking" )
+    @ApiOperation(value = "Registro de un Recipe de un Nutriyionist", notes ="Método que registra un Recipe" )
     @ApiResponses({
-            @ApiResponse(code=201, message = "Booking creado"),
-            @ApiResponse(code=404, message = "Booking no creado")
+            @ApiResponse(code=201, message = "Recipe creado"),
+            @ApiResponse(code=404, message = "Recipe no creado")
     })
-    public ResponseEntity<Recipe> insertRecipe(@PathVariable("id") Integer id, @Valid @RequestBody Booking booking){
+    public ResponseEntity<Recipe> insertRecipe(@PathVariable("id") Integer id, @Valid @RequestBody Recipe recipe){
         try{
-            Optional<Nutri> nutri = nutriservice.getById(id);
-            if(nutri.isPresent()){
-                recipe.setNutri(nutri.get());
+            Optional<Nutritionist> nutritionist = nutritionistService.getById(id);
+            if(nutritionist.isPresent()){
+                recipe.setNutritionist(nutritionist.get());
                 Recipe recipeNew = recipeService.save(recipe);
                 return ResponseEntity.status(HttpStatus.CREATED).body(recipeNew);
             }
@@ -81,19 +85,19 @@ public class RecipeController {
             return new ResponseEntity<Recipe>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    */
+
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value="Actualización de datos de Recipe", notes = "Método que actualizar los datos de Recipe")
     @ApiResponses({
             @ApiResponse(code=200, message = "Datos de Recipe actualizados"),
-            @ApiResponse(code=404, message = "REcipe no encontrado")
+            @ApiResponse(code=404, message = "REcipe no actualizado")
     })
-    public ResponseEntity<Recipe> updateBooking(@PathVariable("id") Integer id, @Valid @RequestBody Recipe recipe){
+    public ResponseEntity<Recipe> updateRecipe(@PathVariable("id") Integer id, @Valid @RequestBody Recipe recipe){
         try{
-            Optional<Recipe> bookingOld = recipeService.getById(id);
-            if(!bookingOld.isPresent())
+            Optional<Recipe> recipeOld = recipeService.getById(id);
+            if(!recipeOld.isPresent())
                 return new ResponseEntity<Recipe>(HttpStatus.NOT_FOUND);
             else{
                 recipe.setId(id);
@@ -109,12 +113,12 @@ public class RecipeController {
     @ApiOperation(value="Eliminación de Recipe por Id", notes = "Método que elimina los datos de un Recipe")
     @ApiResponses({
             @ApiResponse(code=200, message = "Datos de Recipe eliminados"),
-            @ApiResponse(code=404, message = "Recipe no encontrado")
+            @ApiResponse(code=404, message = "Recipe no eliminados")
     })
-    public ResponseEntity<Recipe> deleteBooking(@PathVariable("id") Integer id){
+    public ResponseEntity<Recipe> deleteRecipe(@PathVariable("id") Integer id){
         try{
-            Optional<Recipe> bookingDelete = recipeService.getById(id);
-            if(bookingDelete.isPresent()){
+            Optional<Recipe> recipeDelete = recipeService.getById(id);
+            if(recipeDelete.isPresent()){
                 recipeService.delete(id);
                 return new ResponseEntity<Recipe>(HttpStatus.OK);
             }
