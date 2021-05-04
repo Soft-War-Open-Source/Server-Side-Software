@@ -21,5 +21,5 @@ public class Specialty implements Serializable {
     @Column(name ="name", nullable = false, length = 50)
     private String name;
     @Column(name ="institution_name", nullable = false, length = 50)
-    private String institutionname;
+    private String institution_name;
 }

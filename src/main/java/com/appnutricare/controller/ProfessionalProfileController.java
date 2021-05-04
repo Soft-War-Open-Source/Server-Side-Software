@@ -5,5 +5,5 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/professional_profile")
-public class Professionalprofile {
+public class ProfessionalProfileController {
 }

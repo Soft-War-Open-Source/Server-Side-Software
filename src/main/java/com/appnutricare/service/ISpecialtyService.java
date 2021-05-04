@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ISpecialtyService extends CrudService<Specialty>{
 
-    public List<Specialty> findByInstitutionname(String institutionname) throws Exception;
+    public List<Specialty> findByInstitutionName(String institution_name) throws Exception;
 }

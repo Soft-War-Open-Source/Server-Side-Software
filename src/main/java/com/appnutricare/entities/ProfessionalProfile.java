@@ -12,11 +12,11 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Professionalprofile implements Serializable {
+public class ProfessionalProfile implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(name ="professional_experience_description", nullable = false, length = 500)
-    private String professionalexperiencedescription;
+    private String professional_experience_description;
 }

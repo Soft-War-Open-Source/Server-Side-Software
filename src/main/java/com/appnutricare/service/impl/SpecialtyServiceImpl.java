@@ -40,7 +40,7 @@ public class SpecialtyServiceImpl implements ISpecialtyService {
     }
 
     @Override
-    public List<Specialty> findByInstitutionname(String institutionname) throws Exception {
-        return specialtyRepository.findByInstitutionname(institutionname);
+    public List<Specialty> findByInstitutionName(String institution_name) throws Exception {
+        return specialtyRepository.findByInstitutionName(institution_name);
     }
 }
