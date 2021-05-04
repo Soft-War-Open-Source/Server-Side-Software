@@ -21,6 +21,7 @@ public class Nutritionist implements Serializable {
 
     //Falta professional profile id (int)
 
+
     @Column(name="username", nullable = false, length = 16)
     private String username;
 
