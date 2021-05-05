@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface IRecipeRepository extends JpaRepository<Recipe, Long> {
+public interface IRecipeRepository extends JpaRepository<Recipe, Integer> {
     public List<Recipe> findAllByNutritionist(Long nutritionist);
     public Optional<Recipe> findRecipeById(Integer id);
 }
