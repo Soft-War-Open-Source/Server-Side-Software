@@ -4,6 +4,7 @@ import com.appnutricare.entities.Nutritionist;
 import com.appnutricare.entities.ProfessionalProfile;
 import com.appnutricare.repository.INutritionistRepository;
 import com.appnutricare.service.impl.NutritionistServiceImpl;
+import io.swagger.models.auth.In;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,6 +14,7 @@ import static org.mockito.BDDMockito.given;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import java.text.SimpleDateFormat;
@@ -45,6 +47,13 @@ public class NutritionistServiceImplTest {
 
         assertThat(savedNutritionist).isNotNull();
         verify(nutritionistRepository).save(any(Nutritionist.class));
+    }
+
+    @Test
+    void deleteTest() throws Exception{
+        Integer id = 1;
+        nutritionistService.delete(id);
+        verify(nutritionistRepository, times(1)).deleteById(id);
     }
 
     @Test

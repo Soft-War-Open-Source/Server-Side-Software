@@ -1,10 +1,7 @@
 package com.appnutricare.controller;
 
 import com.appnutricare.entities.Appointment;
-import com.appnutricare.entities.Nutritionist;
 import com.appnutricare.service.IAppointmentService;
-import com.appnutricare.service.IClientService;
-import com.appnutricare.service.INutritionistService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -29,12 +26,12 @@ public class AppointmentController {
     @Autowired
     private IAppointmentService appointmentService;
 
-    @Autowired
-    private IClientService clientService;
-
-    @Autowired
-    private INutritionistService nutritionistService;
-
+//    @Autowired
+//    private IClientService clientService;
+//
+//    @Autowired
+//    private INutritionistService nutritionistService;
+//
 //    @Autowired
 //    private IDietService dietService;
 
@@ -97,13 +94,13 @@ public class AppointmentController {
             @ApiResponse(code=201, message = "Appointments encontrados"),
             @ApiResponse(code=404, message = "Appointments no encontrados")
     })
-    public ResponseEntity<List<Appointment>> findAllAppointments(){
+    public ResponseEntity<List<Appointment>> findAll(){
         try{
             List<Appointment> appointments = appointmentService.getAll();
             if(appointments.size()>0)
                 return new ResponseEntity<List<Appointment>>(appointments, HttpStatus.OK);
             else
-                return new ResponseEntity<List<Appointment>>(HttpStatus.NO_CONTENT);
+                return new ResponseEntity<List<Appointment>>(HttpStatus.NOT_FOUND);
         }catch (Exception e){
             return new ResponseEntity<List<Appointment>>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
