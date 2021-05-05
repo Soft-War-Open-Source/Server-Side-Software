@@ -1,5 +1,6 @@
 package com.appnutricare.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,8 +20,10 @@ public class Nutritionist implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    //Falta professional profile id (int)
-
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="professional_profile", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private ProfessionalProfile professionalProfile;
 
     @Column(name="username", nullable = false, length = 16)
     private String username;

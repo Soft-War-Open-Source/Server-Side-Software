@@ -30,10 +30,10 @@ public class Appointment implements Serializable {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Nutritionist nutritionist;
 
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "diet_id", nullable = false)
-//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-//    private Diet diet;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "diet_id", nullable = true)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Diet diet;
 
     @Column(name = "created_at", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
