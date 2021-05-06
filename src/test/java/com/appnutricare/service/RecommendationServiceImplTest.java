@@ -1,7 +1,8 @@
 package com.appnutricare.service;
-
+import com.appnutricare.entities.ProfessionalProfile;
 import com.appnutricare.entities.Recommendation;
-import com.appnutricare.repository.IrecommendationRepository;
+import com.appnutricare.entities.Nutritionist;
+import com.appnutricare.repository.IRecommendationRepository;
 import com.appnutricare.service.impl.RecommendationServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -34,10 +35,10 @@ public class RecommendationServiceImplTest {
         ProfessionalProfile professionalProfile = new ProfessionalProfile(1, "description1");
         Nutritionist nutritionist = new Nutritionist(1, professionalProfile, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"));
-        Recommendation recommendation = new Recommendation(1,nutritionistList.get(0),"pera","descripcionRandom1",ParseDate("2021-05-05"));
+        Recommendation recommendation = new Recommendation(1,nutritionist,"pera","descripcionRandom1",ParseDate("2021-05-05"),ParseDate("2020-05-05"));
         given(recommendationRepository.save(recommendation)).willReturn(recommendation);
 
-        Recommendation recommendation = null;
+        Recommendation savedRecommendation = null;
         try{
             savedRecommendation = recommendationService.save(recommendation);
         }catch (Exception e)
@@ -53,7 +54,10 @@ public class RecommendationServiceImplTest {
     void findByIdTest() throws Exception
     {
         Integer recommendationId = 1;
-        Recommendation recommendation = new Recommendation(1,nutritionistList.get(0),"pera","descripcionRandom1",ParseDate("2021-05-05"));
+        ProfessionalProfile professionalProfile = new ProfessionalProfile(1, "description1");
+        Nutritionist nutritionistList = new Nutritionist(1, professionalProfile, "pepito1", "pepito123",
+                "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28")); //.10000
+        Recommendation recommendation = new Recommendation(1,nutritionistList,"pera","descripcionRandom1",ParseDate("2021-05-05"),ParseDate("2020-05-05"));
         given(recommendationService.getById(recommendationId)).willReturn(Optional.of(recommendation));
 
         Optional<Recommendation> expected = null;
@@ -85,10 +89,10 @@ public class RecommendationServiceImplTest {
                 "Jose4", "Perez4", "pepito4@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"))); //.10000
 
         recommendationList = new ArrayList<>();
-        recommendationList.add(new Recommendation(1,nutritionistList.get(0),"pera","descripcionRandom1",ParseDate("2021-05-05")));
-        recommendationList.add(new Recommendation(2,nutritionistList.get(1),"pera","descripcionRandom2",ParseDate("2021-04-05")));
-        recommendationList.add(new Recommendation(3,nutritionistList.get(2),"pera","descripcionRandom3",ParseDate("2021-03-05")));
-        recommendationList.add(new Recommendation(4,nutritionistList.get(3),"pera","descripcionRandom4",ParseDate("2021-02-05")));
+        recommendationList.add(new Recommendation(1,nutritionistList.get(0),"pera","descripcionRandom1",ParseDate("2021-05-05"),ParseDate("2020-05-05")));
+        recommendationList.add(new Recommendation(2,nutritionistList.get(1),"pera","descripcionRandom2",ParseDate("2021-04-05"),ParseDate("2020-05-05")));
+        recommendationList.add(new Recommendation(3,nutritionistList.get(2),"pera","descripcionRandom3",ParseDate("2021-03-05"),ParseDate("2020-05-05")));
+        recommendationList.add(new Recommendation(4,nutritionistList.get(3),"pera","descripcionRandom4",ParseDate("2021-02-05"),ParseDate("2020-05-05")));
 
         given(recommendationRepository.findAll()).willReturn(recommendationList);
         List<Recommendation> expected = recommendationService.getAll();
@@ -128,10 +132,10 @@ public class RecommendationServiceImplTest {
         nutritionistList.add(new Nutritionist(4, professionalProfileList.get(3), "pepito4", "pepito123",
                 "Jose4", "Perez4", "pepito4@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"))); //.10000
         recommendationList = new ArrayList<>();
-        recommendationList.add(new Recommendation(1,nutritionistList.get(0),"pera","descripcionRandom1",ParseDate("2021-05-05")));
-        recommendationList.add(new Recommendation(2,nutritionistList.get(1),"pera","descripcionRandom2",ParseDate("2021-04-05")));
-        recommendationList.add(new Recommendation(3,nutritionistList.get(2),"pera","descripcionRandom3",ParseDate("2021-03-05")));
-        recommendationList.add(new Recommendation(4,nutritionistList.get(3),"pera","descripcionRandom4",ParseDate("2021-02-05")));
+        recommendationList.add(new Recommendation(1,nutritionistList.get(0),"pera","descripcionRandom1",ParseDate("2021-05-05"),ParseDate("2020-05-05")));
+        recommendationList.add(new Recommendation(2,nutritionistList.get(1),"pera","descripcionRandom2",ParseDate("2021-04-05"),ParseDate("2020-05-05")));
+        recommendationList.add(new Recommendation(3,nutritionistList.get(2),"pera","descripcionRandom3",ParseDate("2021-03-05"),ParseDate("2020-05-05")));
+        recommendationList.add(new Recommendation(4,nutritionistList.get(3),"pera","descripcionRandom4",ParseDate("2021-02-05"),ParseDate("2020-05-05")));
 
 
         given(recommendationRepository.findByName(name)).willReturn(recommendationList);
@@ -161,10 +165,10 @@ public class RecommendationServiceImplTest {
         nutritionistList.add(new Nutritionist(4, professionalProfileList.get(3), "pepito4", "pepito123",
                 "Jose4", "Perez4", "pepito4@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"))); //.10000
         recommendationList = new ArrayList<>();
-        recommendationList.add(new Recommendation(1,nutritionistList.get(0),"pera","descripcionRandom1",ParseDate("2021-05-05")));
-        recommendationList.add(new Recommendation(2,nutritionistList.get(1),"pera","descripcionRandom2",ParseDate("2021-04-05")));
-        recommendationList.add(new Recommendation(3,nutritionistList.get(2),"pera","descripcionRandom3",ParseDate("2021-03-05")));
-        recommendationList.add(new Recommendation(4,nutritionistList.get(3),"pera","descripcionRandom4",ParseDate("2021-02-05")));
+        recommendationList.add(new Recommendation(1,nutritionistList.get(0),"pera","descripcionRandom1",ParseDate("2021-05-05"),ParseDate("2020-05-05")));
+        recommendationList.add(new Recommendation(2,nutritionistList.get(1),"pera","descripcionRandom2",ParseDate("2021-04-05"),ParseDate("2020-05-05")));
+        recommendationList.add(new Recommendation(3,nutritionistList.get(2),"pera","descripcionRandom3",ParseDate("2021-03-05"),ParseDate("2020-05-05")));
+        recommendationList.add(new Recommendation(4,nutritionistList.get(3),"pera","descripcionRandom4",ParseDate("2021-02-05"),ParseDate("2020-05-05")));
 
 
         given(recommendationRepository.findByDate(date)).willReturn(recommendationList);
