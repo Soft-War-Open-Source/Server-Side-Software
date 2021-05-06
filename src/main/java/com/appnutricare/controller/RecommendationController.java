@@ -80,16 +80,16 @@ public class RecommendationController {
 
     };
 
-    @GetMapping(value = "/searchByRange/{recommendationId1}/{recommendationId2}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Buscar Recommendation por rango", notes = "Método para encontrar un Recommendation por rango")
+    @GetMapping(value = "/searchByDate/{date}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Buscar Recommendation por date", notes = "Método para encontrar un Recommendation por date")
     @ApiResponses({
             @ApiResponse(code = 201, message = "Recommendations encontrado"),
             @ApiResponse(code = 404, message = "Recommendations no ubicado")
     })
-    public ResponseEntity<List<Recommendation>> findByIdRange(@PathVariable("recommendationId1")int recommendationId1,@PathVariable("recommendationId2")int recommendationId2)
+    public ResponseEntity<List<Recommendation>> findByDate(@PathVariable("date")Date date)
     {
         try{
-            List<Recommendation> recommendations = recommendationService.findByIdRange(recommendationId1,recommendationId2);
+            List<Recommendation> recommendations = recommendationService.findByDate(date);
             if(recommendations == null)
                 return new ResponseEntity<List<Recommendation>>(HttpStatus.NOT_FOUND);
             return new ResponseEntity<List<Recommendation>>(recommendations, HttpStatus.OK);
