@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -26,9 +27,9 @@ public class RecommendationServiceImpl implements IRecommendationService{
     };
 
     @Override
-    public List<Recommendation> findByIdRange(int recommendationId1, int recommendationId2) throws Exception
+    public List<Recommendation> findByDate(Date date) throws Exception
     {
-        return recommendationRepository.findByIdRange(recommendationId1,recommendationId2);
+        return recommendationRepository.findByDate(Date date);
 
     };
 

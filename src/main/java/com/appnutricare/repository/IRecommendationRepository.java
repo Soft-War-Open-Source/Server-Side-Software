@@ -4,7 +4,7 @@ package com.appnutricare.repository;
 import com.appnutricare.entities.Recommendation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
+import java.util.Date;
 
 import java.util.List;
 
@@ -15,5 +15,5 @@ public interface IRecommendationRepository extends JpaRepository<Recommendation,
 
     public List<Recommendation> findByName(String name);
 
-    public List<Recommendation> findByIdRange(int recommendationId1, int recommendationId2);
+    public List<Recommendation> findByDate(Date date);
 }
