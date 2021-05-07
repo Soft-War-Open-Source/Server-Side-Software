@@ -1,10 +1,6 @@
 package com.appnutricare.controller;
 
-import com.appnutricare.entities.Appointment;
-import com.appnutricare.entities.ProfessionalProfile;
-import com.appnutricare.entities.Client;
-import com.appnutricare.entities.Nutritionist;
-import com.appnutricare.entities.Diet;
+import com.appnutricare.entities.*;
 import com.appnutricare.service.impl.AppointmentServiceImpl;
 import com.appnutricare.service.impl.NutritionistServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,7 +24,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-
 @WebMvcTest(controllers = AppointmentController.class)
 @ActiveProfiles("test")
 public class AppointmentControllerTest {
@@ -38,7 +33,7 @@ public class AppointmentControllerTest {
 
     @MockBean
     private AppointmentServiceImpl appointmentService;
-    private NutritionistServiceImpl nutritionistService;
+    //private NutritionistServiceImpl nutritionistService;
 
     private List<Appointment> appointmentList;
     private List<ProfessionalProfile> professionalProfileList;
@@ -101,8 +96,17 @@ public class AppointmentControllerTest {
 
     @Test
     void findAppointmentByAppointmentDateBetweenDates() throws Exception{
-        Date date1 = ParseDate("2017-07-21 17:32:28");
-        Date date2 = ParseDate("2017-07-21 17:32:28");
+        String date1_string = "2015-07-21 17:32:28";
+        String date2_string = "2022-07-21 17:32:28";
+        Date date1 = ParseDate2(date1_string);
+        Date date2 = ParseDate2(date2_string);
+        given(appointmentService.findBetweenDates(date1, date2)).willReturn(appointmentList);
+        mockMvc.perform(get("/api/appointment/searchBetweenDates").param("date1", date1_string).param("date2", date2_string)).andExpect(status().isOk());
+    }
+
+    @Test
+    void findAppointmentByNutritionist() throws Exception{
+        Integer NutritionistId = 1;
         ProfessionalProfile professionalProfile = new ProfessionalProfile(1, "description 1");
         Client client = new Client(1, "pepito1", "pepito123", "Jose1", "Perez1",
                 "pepito1@upc.edu.pe", ParseDate("2017-07-21 17:32:28")); //.10000
@@ -112,9 +116,24 @@ public class AppointmentControllerTest {
 
         Appointment appointment = new Appointment(1, client, nutritionist, diet, ParseDate("2017-07-21 17:32:28"),
                 ParseDate("2017-07-21 17:32:28"), "notes1");
-        List<Appointment> appointments = new ArrayList<>();
-        appointments.add(appointment);
-        given(appointmentService.findBetweenDates(date1, date2)).willReturn(appointments);
+        given(appointmentService.findByNutritionist(NutritionistId)).willReturn(appointmentList);
+        mockMvc.perform(get("/api/appointment/searchAppointmentByNutritionistId/{nutritionist_id}", appointment.getNutritionist().getId())).andExpect(status().isOk());
+    }
+
+    @Test
+    void findAppointmentByClient() throws Exception{
+        Integer ClientId = 1;
+        ProfessionalProfile professionalProfile = new ProfessionalProfile(1, "description 1");
+        Client client = new Client(1, "pepito1", "pepito123", "Jose1", "Perez1",
+                "pepito1@upc.edu.pe", ParseDate("2017-07-21 17:32:28")); //.10000
+        Nutritionist nutritionist = new Nutritionist(1, professionalProfile, "pepito1", "pepito123",
+                "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28")); //.10000
+        Diet diet = new Diet(1, "diet1", "description1", ParseDate("2017-07-21 17:32:28"));
+
+        Appointment appointment = new Appointment(1, client, nutritionist, diet, ParseDate("2017-07-21 17:32:28"),
+                ParseDate("2017-07-21 17:32:28"), "notes1");
+        given(appointmentService.findByClient(ClientId)).willReturn(appointmentList);
+        mockMvc.perform(get("/api/appointment/searchAppointmentByClientId/{nutritionist_id}", appointment.getClient().getId())).andExpect(status().isOk());
     }
 
     public static Date ParseDate(String date){
@@ -126,5 +145,16 @@ public class AppointmentControllerTest {
         }
         return result;
     }
+
+    public static Date ParseDate2(String date){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date result = null;
+        try{
+            result = format.parse(date);
+        }catch (Exception e){
+        }
+        return result;
+    }
+
 }
 

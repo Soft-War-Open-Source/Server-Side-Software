@@ -23,7 +23,7 @@ public class Recipe implements Serializable {
         private Integer id;
         @Column(name="name", nullable = false, length = 50)
         private String name;
-        @Column(name="descripcion", nullable = false, length = 250)
+        @Column(name="description", nullable = false, length = 250)
         private String descripcion;
         @Column(name="preparation", nullable = false, length = 500)
         private String preparation;
@@ -32,13 +32,15 @@ public class Recipe implements Serializable {
         @Column(name="favorite", nullable = true, length = 10)
         private Long favorite;
         @Column(name="created_at", nullable = false)
+        @Temporal(TemporalType.TIMESTAMP)
         private Date created_at;
         @Column(name="last_modification", nullable = false)
+        @Temporal(TemporalType.TIMESTAMP)
         private Date last_modification;
 
         //Implementacion de FK - el many to one con nutritionist
         @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name="Nutritionist_id", nullable = false)
+        @JoinColumn(name="nutritionist_id", nullable = false)
         @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
         private Nutritionist nutritionist;
 
