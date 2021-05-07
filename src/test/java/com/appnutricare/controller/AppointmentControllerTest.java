@@ -133,7 +133,7 @@ public class AppointmentControllerTest {
         Appointment appointment = new Appointment(1, client, nutritionist, diet, ParseDate("2017-07-21 17:32:28"),
                 ParseDate("2017-07-21 17:32:28"), "notes1");
         given(appointmentService.findByClient(ClientId)).willReturn(appointmentList);
-        mockMvc.perform(get("/api/appointment/searchAppointmentByClientId/{nutritionist_id}", appointment.getClient().getId())).andExpect(status().isOk());
+        mockMvc.perform(get("/api/appointment/searchAppointmentByClientId/{client_id}", appointment.getClient().getId())).andExpect(status().isOk());
     }
 
     public static Date ParseDate(String date){

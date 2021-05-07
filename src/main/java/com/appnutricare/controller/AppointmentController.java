@@ -214,16 +214,16 @@ public class AppointmentController {
         }
     };
 
-    @GetMapping(value = "/searchAppointmentByClientId/{nutritionist_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/searchAppointmentByClientId/{client_id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Buscar Appointments por client id", notes = "Método para encontrar Appointments por client id")
     @ApiResponses({
             @ApiResponse(code = 201, message = "Appointments encontrados"),
             @ApiResponse(code = 404, message = "Appointments no ubicados")
     })
-    public ResponseEntity<List<Appointment>> findByClient(@PathVariable("nutritionist_id") Integer nutritionist_id)
+    public ResponseEntity<List<Appointment>> findByClient(@PathVariable("client_id") Integer client_id)
     {
         try{
-            List<Appointment> appointments = appointmentService.findByClient(nutritionist_id);
+            List<Appointment> appointments = appointmentService.findByClient(client_id);
             if(appointments.size()>0)
                 return new ResponseEntity<List<Appointment>>(HttpStatus.OK);
             return new ResponseEntity<List<Appointment>>(appointments, HttpStatus.NOT_FOUND);
@@ -231,5 +231,4 @@ public class AppointmentController {
             return new ResponseEntity<List<Appointment>>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     };
-
 }
