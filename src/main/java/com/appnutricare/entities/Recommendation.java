@@ -17,14 +17,10 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Recommendation implements Serializable{
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "recommendation_author_id", nullable = false)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Client recommendationAuthorId;
-
     @Column(name = "name", nullable = false, length = 50)
     private String name;
     @Column(name = "description", nullable = false, length = 250)
@@ -36,4 +32,8 @@ public class Recommendation implements Serializable{
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastModification;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "nutritionist_id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+    private Nutritionist nutritionist;
 }

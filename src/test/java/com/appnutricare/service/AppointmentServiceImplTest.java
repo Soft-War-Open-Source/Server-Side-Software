@@ -103,8 +103,10 @@ public class AppointmentServiceImplTest {
 
     @Test
     void findBetweenDatesTest() throws Exception{
-        Date date1 = ParseDate("2017-07-21 17:32:28");
-        Date date2 = ParseDate("2017-07-21 17:32:28");
+        String date1_string = "2015-07-21 17:32:28";
+        String date2_string = "2022-07-21 17:32:28";
+        Date date1 = ParseDate2(date1_string);
+        Date date2 = ParseDate2(date2_string);
         ProfessionalProfile professionalProfile = new ProfessionalProfile(1, "description 1");
         Client client = new Client(1, "pepito1", "pepito123", "Jose1", "Perez1",
                 "pepito1@upc.edu.pe", ParseDate("2017-07-21 17:32:28")); //.10000
@@ -162,6 +164,16 @@ public class AppointmentServiceImplTest {
 
     public static Date ParseDate(String date){
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date result = null;
+        try{
+            result = format.parse(date);
+        }catch (Exception e){
+        }
+        return result;
+    }
+
+    public static Date ParseDate2(String date){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date result = null;
         try{
             result = format.parse(date);

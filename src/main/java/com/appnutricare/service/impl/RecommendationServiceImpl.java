@@ -1,6 +1,7 @@
 package com.appnutricare.service.impl;
 
 
+import com.appnutricare.entities.Appointment;
 import com.appnutricare.entities.Recommendation;
 import com.appnutricare.repository.IRecommendationRepository;
 import com.appnutricare.service.IRecommendationService;
@@ -18,20 +19,6 @@ public class RecommendationServiceImpl implements IRecommendationService{
 
     @Autowired
     private IRecommendationRepository recommendationRepository;
-
-    @Override
-    public List<Recommendation> findByName(String name) throws Exception
-    {
-        return recommendationRepository.findByName(name);
-
-    };
-
-    @Override
-    public List<Recommendation> findByDate(Date date) throws Exception
-    {
-        return recommendationRepository.findByDate(Date date);
-
-    };
 
     @Override
     @Transactional
@@ -55,9 +42,20 @@ public class RecommendationServiceImpl implements IRecommendationService{
         return recommendationRepository.findById(id);
     }
 
+    @Override
+    public List<Recommendation> findByName(String name) throws Exception
+    {
+        return recommendationRepository.findByName(name);
+    }
 
+    @Override
+    public List<Recommendation> findBetweenDates(Date date1, Date date2) throws Exception {
+        return recommendationRepository.findBetweenDates(date1, date2);
+    }
 
-
-
-
+    @Override
+    public List<Recommendation> findByNutritionist(Integer nutritionist_id) throws Exception
+    {
+        return recommendationRepository.findByNutritionist(nutritionist_id);
+    }
 }

@@ -120,10 +120,10 @@ public class SpecialtyController {
             @ApiResponse(code = 201, message = "Specialty encontrado"),
             @ApiResponse(code = 404, message = "Specialty no encontrado")
     })
-    public ResponseEntity<List<Specialty>> findByinstitution_name(@PathVariable("institution_name") String institution_name){
+    public ResponseEntity<List<Specialty>> findByInstitutionName(@PathVariable("institution_name") String institution_name){
         try {
             List<Specialty> specialties = new ArrayList<>();
-            specialties = specialtyService.findByinstitution_name(institution_name);
+            specialties = specialtyService.findByInstitutionName(institution_name);
             if(specialties.isEmpty())
                 return new ResponseEntity<List<Specialty>>(HttpStatus.NOT_FOUND);
             return new ResponseEntity<List<Specialty>>(specialties, HttpStatus.OK);

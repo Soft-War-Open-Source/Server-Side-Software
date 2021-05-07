@@ -12,7 +12,6 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@NamedQuery(name = "Specialty.findByInstitutionname",query = "select c from Specialty c where c.institution_name = ?1")
 public class Specialty implements Serializable {
 
     @Id
@@ -21,5 +20,5 @@ public class Specialty implements Serializable {
     @Column(name ="name", nullable = false, length = 50)
     private String name;
     @Column(name ="institution_name", nullable = false, length = 50)
-    private String institution_name;
+    private String institutionName;
 }
