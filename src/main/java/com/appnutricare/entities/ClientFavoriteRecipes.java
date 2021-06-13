@@ -1,29 +1,25 @@
 package com.appnutricare.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name="client_favorite_recipes")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class ClientFavoriteRecipes implements Serializable {
+@IdClass(ClientFavoriteRecipesFK.class)
+public class ClientFavoriteRecipes{
 
-    @EmbeddedId
-    private ClientFavoriteRecipesFK id;
-
+    @Id
     @ManyToOne
-    @MapsId("client_id")
-    @JoinColumn(name = "client_id")
+    @JoinColumn(name = "client_id", referencedColumnName = "id")
     private Client client;
 
+    @Id
     @ManyToOne
-    @MapsId("recipe_id")
-    @JoinColumn(name = "recipe_id")
+    @JoinColumn(name = "recipe_id", referencedColumnName = "id")
     private Recipe recipe;
+
+    @Column(name = "added_at", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date addedAt;
 }

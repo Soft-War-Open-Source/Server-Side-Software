@@ -1,29 +1,19 @@
 package com.appnutricare.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name="professional_specialties")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class ProfessionalSpecialties implements Serializable {
+@IdClass(ProfessionalSpecialtiesFK.class)
+public class ProfessionalSpecialties {
 
-    @EmbeddedId
-    private ProfessionalSpecialtiesFK id;
-
+    @Id
     @ManyToOne
-    @MapsId("professional_profile_id")
-    @JoinColumn(name = "professional_profile_id")
+    @JoinColumn(name = "professional_profile_id", referencedColumnName = "id")
     private ProfessionalProfile professionalProfile;
 
+    @Id
     @ManyToOne
-    @MapsId("specialty_id")
-    @JoinColumn(name = "specialty_id")
+    @JoinColumn(name = "specialty_id", referencedColumnName = "id")
     private Specialty specialty;
 }

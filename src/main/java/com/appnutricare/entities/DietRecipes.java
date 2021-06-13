@@ -1,29 +1,19 @@
 package com.appnutricare.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name="diet_recipes")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class DietRecipes implements Serializable {
+@IdClass(DietRecipesFK.class)
+public class DietRecipes {
 
-    @EmbeddedId
-    private DietRecipesFK id;
-
+    @Id
     @ManyToOne
-    @MapsId("diet_id")
-    @JoinColumn(name = "diet_id")
+    @JoinColumn(name = "diet_id", referencedColumnName = "id")
     private Diet diet;
 
+    @Id
     @ManyToOne
-    @MapsId("recipe_id")
-    @JoinColumn(name = "recipe_id")
+    @JoinColumn(name = "recipe_id", referencedColumnName = "id")
     private Recipe recipe;
 }
