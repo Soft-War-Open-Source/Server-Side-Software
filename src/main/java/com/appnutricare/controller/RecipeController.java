@@ -14,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -118,5 +120,79 @@ public class RecipeController {
         }catch (Exception e){
             return new ResponseEntity<Recipe>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    //desde aqui empezare la implementacion de los demas metodos
+
+    //buscar por recipe por nutricionista.
+
+    @GetMapping(value = "/searchRecipeByNutritionistId/{nutritionist_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Buscar recipe por nutritionist id", notes = "Método para encontrar recipe por nutritionist id")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Recipe encontrados"),
+            @ApiResponse(code = 404, message = "Recipe no encontrados")
+    })
+    public ResponseEntity<List<Recipe>> findByNutritionist(@PathVariable("nutritionist_id") Integer nutritionist_id)
+    {
+        try{
+            List<Recipe> recipes = recipeService.findAllByNutritionist(nutritionist_id);
+            if(recipes.size()>0)
+                return new ResponseEntity<List<Recipe>>(HttpStatus.OK);
+            return new ResponseEntity<List<Recipe>>(recipes, HttpStatus.NOT_FOUND);
+        }catch (Exception e){
+            return new ResponseEntity<List<Recipe>>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    //buscar recipe por nombre
+
+    @GetMapping(value = "/searchByName/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Buscar Recipe por name", notes = "Método para encontrar un Recipe por su respectivo name")
+    @ApiResponses({
+            @ApiResponse(code=201, message = "Recipe encontrado"),
+            @ApiResponse(code=404, message = "Recipe no encontrado")
+    })
+    public ResponseEntity<Recipe> findByName(@PathVariable("name") String name){
+        try{
+            Recipe recipe = recipeService.findByName(name);
+            if(recipe==null)
+                return new ResponseEntity<Recipe>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Recipe>(recipe,HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<Recipe>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    //buscar recipe entre dates
+
+    @GetMapping(value = "/searchBetweenDates", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Buscar Recipe entre fechas", notes = "Método para listar recipe entre fechas")
+    @ApiResponses({
+            @ApiResponse(code=201, message = "recipe encontrados"),
+            @ApiResponse(code=404, message = "recipe no encontrados")
+    }) //Al requestparam le puedes decir que sea opcional y no necesita estar en el URL
+    public ResponseEntity<List<Recipe>> findRecipeByCreated_atBetweenDates(@RequestParam("date1") String date1_string,
+                                                                           @RequestParam("date2") String date2_string){
+        try{
+            Date checking_date = ParseDate(date1_string);
+            Date checkout_date = ParseDate(date2_string);
+            List<Recipe> recipes = recipeService.findBetweenDates(checking_date, checkout_date);
+            if(recipes!=null && recipes.size()>0)
+                return new ResponseEntity<List<Recipe>>(recipes, HttpStatus.OK);
+            else
+                return new ResponseEntity<List<Recipe>>(recipes, HttpStatus.NOT_FOUND);
+        }catch (Exception e){
+            return new ResponseEntity<List<Recipe>>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public static Date ParseDate(String date){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date result = null;
+        try{
+            result = format.parse(date);
+        }catch (Exception e){
+        }
+        return result;
     }
 }

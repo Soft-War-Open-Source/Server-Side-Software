@@ -97,7 +97,7 @@ public class RecipeServiceImplTest {
 
     @Test
     void findAllByNutritionist() throws Exception {
-        Long nutritionistId = 1L;
+        Integer nutritionistId = 1;
         List<Recipe> recipeList;
 
         ProfessionalProfile professionalProfile = new ProfessionalProfile(1, "description1");
