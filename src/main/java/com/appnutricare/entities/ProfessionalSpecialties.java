@@ -1,19 +1,24 @@
 package com.appnutricare.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name="professional_specialties")
-@IdClass(ProfessionalSpecialtiesFK.class)
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProfessionalSpecialties {
 
-    @Id
+    @EmbeddedId
+    private ProfessionalSpecialtiesFK professionalSpecialtiesFK;
+
     @ManyToOne
-    @JoinColumn(name = "professional_profile_id", referencedColumnName = "id")
+    @MapsId("professionalProfileId")
     private ProfessionalProfile professionalProfile;
 
-    @Id
     @ManyToOne
-    @JoinColumn(name = "specialty_id", referencedColumnName = "id")
+    @MapsId("specialtyId")
     private Specialty specialty;
 }

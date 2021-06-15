@@ -1,22 +1,27 @@
 package com.appnutricare.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name="client_favorite_recipes")
-@IdClass(ClientFavoriteRecipesFK.class)
+@NoArgsConstructor
+@AllArgsConstructor
 public class ClientFavoriteRecipes{
 
-    @Id
+    @EmbeddedId
+    private ClientFavoriteRecipesFK clientFavoriteRecipesFK;
+
     @ManyToOne
-    @JoinColumn(name = "client_id", referencedColumnName = "id")
+    @MapsId("clientId")
     private Client client;
 
-    @Id
     @ManyToOne
-    @JoinColumn(name = "recipe_id", referencedColumnName = "id")
+    @MapsId("recipeId")
     private Recipe recipe;
 
     @Column(name = "added_at", nullable = false)

@@ -45,5 +45,5 @@ public class Client implements Serializable {
     private Date createdAt;
 
     @OneToMany(mappedBy = "client")
-    private List<ClientFavoriteRecipes> recipeAssoc;
+    private List<ClientFavoriteRecipes> clientAssoc;
 }

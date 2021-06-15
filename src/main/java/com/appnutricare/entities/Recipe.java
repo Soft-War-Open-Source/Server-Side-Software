@@ -58,8 +58,8 @@ public class Recipe implements Serializable {
         private Nutritionist nutritionist;
 
         @OneToMany(mappedBy = "recipe")
-        private List<ClientFavoriteRecipes> clientAssoc;
+        private List<ClientFavoriteRecipes> recipeClientAssoc;
 
         @OneToMany(mappedBy = "recipe")
-        private List<DietRecipes> recipeAssoc;
+        private List<DietRecipes> recipeDietAssoc;
 }

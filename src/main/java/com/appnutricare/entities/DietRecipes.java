@@ -1,19 +1,24 @@
 package com.appnutricare.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name="diet_recipes")
-@IdClass(DietRecipesFK.class)
+@NoArgsConstructor
+@AllArgsConstructor
 public class DietRecipes {
 
-    @Id
+    @EmbeddedId
+    private DietRecipesFK dietRecipesFK;
+
     @ManyToOne
-    @JoinColumn(name = "diet_id", referencedColumnName = "id")
+    @MapsId("dietId")
     private Diet diet;
 
-    @Id
     @ManyToOne
-    @JoinColumn(name = "recipe_id", referencedColumnName = "id")
+    @MapsId("recipeId")
     private Recipe recipe;
 }

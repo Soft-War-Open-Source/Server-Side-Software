@@ -35,10 +35,9 @@ public class AppointmentServiceImplTest {
 
     @Test
     public void saveTest(){
-        ProfessionalProfile professionalProfile = new ProfessionalProfile(1, "description 1");
         Client client = new Client(1, "pepito1", "pepito123", "Jose1", "Perez1",
                 "pepito1@upc.edu.pe", ParseDate("2017-07-21 17:32:28")); //.10000
-        Nutritionist nutritionist = new Nutritionist(1, professionalProfile, "pepito1", "pepito123",
+        Nutritionist nutritionist = new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28")); //.10000
         Diet diet = new Diet(1, "diet1", "description1", ParseDate("2017-07-21 17:32:28"));
 
@@ -65,10 +64,9 @@ public class AppointmentServiceImplTest {
     @Test
     void findByIdTest() throws Exception {
         Integer id = 1;
-        ProfessionalProfile professionalProfile = new ProfessionalProfile(1, "description 1");
         Client client = new Client(1, "pepito1", "pepito123", "Jose1", "Perez1",
                 "pepito1@upc.edu.pe", ParseDate("2017-07-21 17:32:28")); //.10000
-        Nutritionist nutritionist = new Nutritionist(1, professionalProfile, "pepito1", "pepito123",
+        Nutritionist nutritionist = new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28")); //.10000
         Diet diet = new Diet(1, "diet1", "description1", ParseDate("2017-07-21 17:32:28"));
 
@@ -83,10 +81,9 @@ public class AppointmentServiceImplTest {
 
     @Test
     void findAllTest() throws Exception {
-        ProfessionalProfile professionalProfile = new ProfessionalProfile(1, "description 1");
         Client client = new Client(1, "pepito1", "pepito123", "Jose1", "Perez1",
                 "pepito1@upc.edu.pe", ParseDate("2017-07-21 17:32:28")); //.10000
-        Nutritionist nutritionist = new Nutritionist(1, professionalProfile, "pepito1", "pepito123",
+        Nutritionist nutritionist = new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28")); //.10000
         Diet diet = new Diet(1, "diet1", "description1", ParseDate("2017-07-21 17:32:28"));
 
@@ -107,10 +104,9 @@ public class AppointmentServiceImplTest {
         String date2_string = "2022-07-21 17:32:28";
         Date date1 = ParseDate2(date1_string);
         Date date2 = ParseDate2(date2_string);
-        ProfessionalProfile professionalProfile = new ProfessionalProfile(1, "description 1");
         Client client = new Client(1, "pepito1", "pepito123", "Jose1", "Perez1",
                 "pepito1@upc.edu.pe", ParseDate("2017-07-21 17:32:28")); //.10000
-        Nutritionist nutritionist = new Nutritionist(1, professionalProfile, "pepito1", "pepito123",
+        Nutritionist nutritionist = new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28")); //.10000
         Diet diet = new Diet(1, "diet1", "description1", ParseDate("2017-07-21 17:32:28"));
 
@@ -126,10 +122,9 @@ public class AppointmentServiceImplTest {
 
     @Test
     void findByClientTest() throws Exception{
-        ProfessionalProfile professionalProfile = new ProfessionalProfile(1, "description 1");
         Client client = new Client(1, "pepito1", "pepito123", "Jose1", "Perez1",
                 "pepito1@upc.edu.pe", ParseDate("2017-07-21 17:32:28")); //.10000
-        Nutritionist nutritionist = new Nutritionist(1, professionalProfile, "pepito1", "pepito123",
+        Nutritionist nutritionist = new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28")); //.10000
         Diet diet = new Diet(1, "diet1", "description1", ParseDate("2017-07-21 17:32:28"));
 
@@ -145,10 +140,9 @@ public class AppointmentServiceImplTest {
 
     @Test
     void findByNutritionistTest() throws Exception{
-        ProfessionalProfile professionalProfile = new ProfessionalProfile(1, "description 1");
         Client client = new Client(1, "pepito1", "pepito123", "Jose1", "Perez1",
                 "pepito1@upc.edu.pe", ParseDate("2017-07-21 17:32:28")); //.10000
-        Nutritionist nutritionist = new Nutritionist(1, professionalProfile, "pepito1", "pepito123",
+        Nutritionist nutritionist = new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28")); //.10000
         Diet diet = new Diet(1, "diet1", "description1", ParseDate("2017-07-21 17:32:28"));
 

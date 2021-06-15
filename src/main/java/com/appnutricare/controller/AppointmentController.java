@@ -1,6 +1,7 @@
 package com.appnutricare.controller;
 
 import com.appnutricare.entities.Appointment;
+import com.appnutricare.entities.Diet;
 import com.appnutricare.entities.Recommendation;
 import com.appnutricare.service.IAppointmentService;
 import io.swagger.annotations.Api;
@@ -147,7 +148,6 @@ public class AppointmentController {
         return result;
     }
 
-    // Modificar notas del appointment - - FALTA MODIFICAR BIEN
     @PutMapping(value = "/update_appointment_notes/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Actualización de notas de Appointment", notes = "Método que actualiza las notas un Appointment")
     @ApiResponses({
@@ -155,23 +155,21 @@ public class AppointmentController {
             @ApiResponse(code=404, message = "Appointment no encontrado")
     })
     public ResponseEntity<Appointment> updateAppointmentNotes(@PathVariable("id") Integer id,
-                                                             @Valid @RequestBody Appointment appointment){
+                                                             @Valid @RequestBody String notes){
         try{
             Optional<Appointment> appointmentOld = appointmentService.getById(id); //Se encuentra un appointment
             if(!appointmentOld.isPresent()) {
                 return new ResponseEntity<Appointment>(HttpStatus.NOT_FOUND);
             }
-            else { //Si es así, se actualiza con nuevos datos del Appointment que está llegando
-                appointment.setId(id);
-                appointmentService.save(appointment);
+            else { //Si es así, se actualiza con nuevos datos
+                appointmentOld.get().setNutritionistNotes(notes);
+                appointmentService.save(appointmentOld.get());
                 return new ResponseEntity<Appointment>(HttpStatus.OK);
             }
         }catch (Exception e){
             return new ResponseEntity<Appointment>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-    //Modificar la fecha del appointment - FALTA MODIFICAR BIEN
 
     @PutMapping(value = "/update_appointment_date/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Actualización de fecha de Appointment", notes = "Método que actualiza la fecha un Appointment")
@@ -180,15 +178,16 @@ public class AppointmentController {
             @ApiResponse(code=404, message = "Appointment no encontrado")
     })
     public ResponseEntity<Appointment> updateAppointmentDate(@PathVariable("id") Integer id,
-                                                             @Valid @RequestBody Appointment appointment){
+                                                             @Valid @RequestBody String date){
         try{
             Optional<Appointment> appointmentOld = appointmentService.getById(id); //Se encuentra un appointment
             if(!appointmentOld.isPresent()) {
                 return new ResponseEntity<Appointment>(HttpStatus.NOT_FOUND);
             }
-            else { //Si es así, se actualiza con nuevos datos del Appointment que está llegando
-                appointment.setId(id);
-                appointmentService.save(appointment);
+            else { //Si es así, se actualiza con nuevos datos
+                Date new_date = ParseDate(date);
+                appointmentOld.get().setAppointmentDate(new_date);
+                appointmentService.save(appointmentOld.get());
                 return new ResponseEntity<Appointment>(HttpStatus.OK);
             }
         }catch (Exception e){
@@ -212,7 +211,7 @@ public class AppointmentController {
         }catch (Exception e){
             return new ResponseEntity<List<Appointment>>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    };
+    }
 
     @GetMapping(value = "/searchAppointmentByClientId/{client_id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Buscar Appointments por client id", notes = "Método para encontrar Appointments por client id")
@@ -230,5 +229,31 @@ public class AppointmentController {
         }catch (Exception e){
             return new ResponseEntity<List<Appointment>>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    };
+    }
+
+
+    //AssignDietToAppointment
+    @PutMapping(value = "/assignDietToAppointment/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Asignación de un Diet a un Appointment", notes = "Método que asigna un Diet a un Appointment")
+    @ApiResponses({
+            @ApiResponse(code=201, message = "Diet asignado correctamente"),
+            @ApiResponse(code=404, message = "Appointment no encontrado")
+    })
+    public ResponseEntity<Appointment> assignDietToAppointment(@PathVariable("id") Integer id,
+                                                              @Valid @RequestBody Diet diet){
+        try{
+            Optional<Appointment> appointmentOld = appointmentService.getById(id); //Se encuentra un appointment
+            if(!appointmentOld.isPresent()) {
+                return new ResponseEntity<Appointment>(HttpStatus.NOT_FOUND);
+            }
+            else { //Si es así, se actualiza con nuevos datos
+                appointmentOld.get().setDiet(diet);
+                appointmentService.save(appointmentOld.get());
+                return new ResponseEntity<Appointment>(HttpStatus.OK);
+            }
+        }catch (Exception e){
+            return new ResponseEntity<Appointment>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    //
 }

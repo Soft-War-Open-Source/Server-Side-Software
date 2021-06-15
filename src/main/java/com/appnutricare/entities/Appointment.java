@@ -45,5 +45,4 @@ public class Appointment implements Serializable {
 
     @Column(name = "nutritionist_notes", nullable = true)
     private String nutritionistNotes;
-
 }

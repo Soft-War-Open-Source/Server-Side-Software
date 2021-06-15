@@ -30,5 +30,5 @@ public class Specialty implements Serializable {
     private String institutionName;
 
     @OneToMany(mappedBy = "specialty")
-    private List<ProfessionalSpecialties> professionalProfileAssoc;
+    private List<ProfessionalSpecialties> specialtyAssoc;
 }

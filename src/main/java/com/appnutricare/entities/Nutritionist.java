@@ -22,12 +22,6 @@ public class Nutritionist implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name="professionalprofile_id", nullable = false)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private ProfessionalProfile professionalProfile;
-
     @Column(name="username", nullable = false, length = 16)
     private String username;
 

@@ -35,8 +35,7 @@ public class RecipeServiceImplTest {
 
     @Test
     public void saveTest(){
-        ProfessionalProfile professionalProfile = new ProfessionalProfile(1, "description1");
-        Nutritionist nutritionist = new Nutritionist(1, professionalProfile, "pepito1", "pepito123",
+        Nutritionist nutritionist = new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28")); //.10000
         Recipe recipe = new Recipe(1,"Receta numero 1","La receta numero uno esta conpuesta de frutos etc",
                 "Paso1: asdasd, Paso2_asdasdas","Pera,mango,uva",1L,ParseDate("2017-07-21 17:32:28"),
@@ -58,8 +57,7 @@ public class RecipeServiceImplTest {
     @Test
     void findByIdTest() throws Exception {
         Integer id = 1;
-        ProfessionalProfile professionalProfile = new ProfessionalProfile(1, "description1");
-        Nutritionist nutritionist = new Nutritionist(1, professionalProfile, "pepito1", "pepito123",
+        Nutritionist nutritionist = new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"));
 
         Recipe recipe = new Recipe(1,"Receta numero 1","La receta numero uno esta conpuesta de frutos etc",
@@ -78,8 +76,7 @@ public class RecipeServiceImplTest {
 
         List<Recipe> recipeList;
 
-        ProfessionalProfile professionalProfile = new ProfessionalProfile(1, "description1");
-        Nutritionist nutritionist = new Nutritionist(1, professionalProfile, "pepito1", "pepito123",
+        Nutritionist nutritionist = new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"));
 
         recipeList = new ArrayList<>();
@@ -100,8 +97,7 @@ public class RecipeServiceImplTest {
         Integer nutritionistId = 1;
         List<Recipe> recipeList;
 
-        ProfessionalProfile professionalProfile = new ProfessionalProfile(1, "description1");
-        Nutritionist nutritionist = new Nutritionist(1, professionalProfile, "pepito1", "pepito123",
+        Nutritionist nutritionist = new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"));
 
         recipeList = new ArrayList<>();

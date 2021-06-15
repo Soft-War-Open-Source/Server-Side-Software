@@ -35,8 +35,7 @@ public class RecipeControllerTest {
 
     @BeforeEach
     void setUp(){
-        ProfessionalProfile professionalProfile = new ProfessionalProfile(1, "description1");
-        Nutritionist nutritionist = new Nutritionist(1, professionalProfile, "pepito1", "pepito123",
+        Nutritionist nutritionist = new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21"));
         recipeList = new ArrayList<>();
         recipeList.add(new Recipe(1,"Receta numero 1","La receta numero uno esta conpuesta de frutos etc",
@@ -56,8 +55,7 @@ public class RecipeControllerTest {
     @Test
     void findRecipeById() throws Exception{
         Integer recipeId = 1;
-        ProfessionalProfile professionalProfile = new ProfessionalProfile(1, "description1");
-        Nutritionist nutritionist = new Nutritionist(1, professionalProfile, "pepito1", "pepito123",
+        Nutritionist nutritionist = new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21"));
 
         Recipe recipe = new Recipe(1,"Receta numero 1","La receta numero uno esta conpuesta de frutos etc",
