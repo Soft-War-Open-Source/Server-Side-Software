@@ -28,7 +28,7 @@ public class RecipeServiceImpl implements IRecipeService {
     @Override
     @Transactional
     public void delete(Integer id) throws Exception {
-        recipeRepository.findRecipeById(id);
+        recipeRepository.deleteById(id);
     }
 
     @Override

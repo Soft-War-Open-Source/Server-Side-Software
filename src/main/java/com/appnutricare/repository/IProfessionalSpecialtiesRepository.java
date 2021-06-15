@@ -14,6 +14,6 @@ import java.util.List;
 public interface IProfessionalSpecialtiesRepository
         extends JpaRepository<ProfessionalSpecialties, ProfessionalSpecialtiesFK>{
 
-    @Query("Select b.specialty from ProfessionalSpecialties b where b.professionalProfile.nutritionist.id = :nutritionist_id")
-    public List<Specialty> findByNutritionist(@Param("nutritionist_id") Integer nutritionist_id);
+    @Query("Select b.specialty from ProfessionalSpecialties b where b.professionalProfile.id = :professional_profile_id")
+    public List<Specialty> findByProfessionalProfileId(@Param("professional_profile_id") Integer professional_profile_id);
 }

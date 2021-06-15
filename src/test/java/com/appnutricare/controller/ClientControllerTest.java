@@ -108,17 +108,6 @@ public class ClientControllerTest {
         mockMvc.perform(get("/api/clients/searchByUsername/{username}", client.getUsername())).andExpect(status().isOk());
     }
 
-    /*public static Date ParseDate(String date)
-    {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy,MM,dd");
-        Date result = null;
-        try{
-            result = format.parse(date);
-        }catch (Exception e){
-        }
-        return result;
-    }*/
-
     public static Date ParseDate(String date){
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date result = null;

@@ -117,7 +117,7 @@ public class RecipeServiceImplTest {
     void deleteTest() throws Exception {
         Integer id = 1;
         recipeService.delete(1);
-        verify(recipeRepository, times(1)).findRecipeById(id);
+        verify(recipeRepository, times(1)).deleteById(id);
     }
 
     public static Date ParseDate(String date){

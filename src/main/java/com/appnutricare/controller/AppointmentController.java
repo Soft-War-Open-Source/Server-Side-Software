@@ -206,8 +206,8 @@ public class AppointmentController {
         try{
             List<Appointment> appointments = appointmentService.findByNutritionist(nutritionist_id);
             if(appointments.size()>0)
-                return new ResponseEntity<List<Appointment>>(HttpStatus.OK);
-            return new ResponseEntity<List<Appointment>>(appointments, HttpStatus.NOT_FOUND);
+                return new ResponseEntity<List<Appointment>>(appointments, HttpStatus.OK);
+            return new ResponseEntity<List<Appointment>>(HttpStatus.NOT_FOUND);
         }catch (Exception e){
             return new ResponseEntity<List<Appointment>>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -224,8 +224,8 @@ public class AppointmentController {
         try{
             List<Appointment> appointments = appointmentService.findByClient(client_id);
             if(appointments.size()>0)
-                return new ResponseEntity<List<Appointment>>(HttpStatus.OK);
-            return new ResponseEntity<List<Appointment>>(appointments, HttpStatus.NOT_FOUND);
+                return new ResponseEntity<List<Appointment>>(appointments, HttpStatus.OK);
+            return new ResponseEntity<List<Appointment>>(HttpStatus.NOT_FOUND);
         }catch (Exception e){
             return new ResponseEntity<List<Appointment>>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

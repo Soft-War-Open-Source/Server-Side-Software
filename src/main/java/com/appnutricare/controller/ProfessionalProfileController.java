@@ -146,17 +146,17 @@ public class ProfessionalProfileController {
         }
     }
 
-    @GetMapping(value = "/findNutritionistSpecialties/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Buscar Specialties de un Nutritionist", notes = "Método para listar Specialties de un Nutritionist")
+    @GetMapping(value = "/findSpecialtiesByProfessionalProfileId/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Buscar Specialties de un ProfessionalProfile", notes = "Método para listar Specialties de un ProfessionalProfile")
     @ApiResponses({
             @ApiResponse(code = 201, message = "Specialties encontrados"),
             @ApiResponse(code = 404, message = "Specialties no encontrados")
     })
-    public ResponseEntity<List<Specialty>> findNutritionistSpecialties(@PathVariable("id") Integer id)
+    public ResponseEntity<List<Specialty>> findSpecialtiesByProfessionalProfileId(@PathVariable("id") Integer id)
     {
         try {
             List<Specialty> specialties = new ArrayList<>();
-            specialties = professionalSpecialtiesRepository.findByNutritionist(id);
+            specialties = professionalSpecialtiesRepository.findByProfessionalProfileId(id);
             if(specialties.isEmpty())
                 return new ResponseEntity<List<Specialty>>(HttpStatus.NOT_FOUND);
             return new ResponseEntity<List<Specialty>>(specialties, HttpStatus.OK);

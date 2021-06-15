@@ -65,7 +65,7 @@ public class RecipeController {
 
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Registro de un Recipe de un Nutriyionist", notes ="Método que registra un Recipe" )
+    @ApiOperation(value = "Registro de un Recipe de un Nutritionist", notes ="Método que registra un Recipe" )
     @ApiResponses({
             @ApiResponse(code=201, message = "Recipe creado"),
             @ApiResponse(code=404, message = "Recipe no creado")
@@ -137,8 +137,8 @@ public class RecipeController {
         try{
             List<Recipe> recipes = recipeService.findAllByNutritionist(nutritionist_id);
             if(recipes.size()>0)
-                return new ResponseEntity<List<Recipe>>(HttpStatus.OK);
-            return new ResponseEntity<List<Recipe>>(recipes, HttpStatus.NOT_FOUND);
+                return new ResponseEntity<List<Recipe>>(recipes, HttpStatus.OK);
+            return new ResponseEntity<List<Recipe>>(HttpStatus.NOT_FOUND);
         }catch (Exception e){
             return new ResponseEntity<List<Recipe>>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
