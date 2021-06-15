@@ -32,7 +32,9 @@ public class ClientControllerTest {
 
     @MockBean
     private ClientServiceImpl clientService;
+    @MockBean
     private RecipeServiceImpl recipeService;
+    @MockBean
     private IClientFavoriteRecipesRepository clientFavoriteRecipesRepository;
 
 

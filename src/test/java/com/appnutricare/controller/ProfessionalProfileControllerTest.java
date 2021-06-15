@@ -3,7 +3,9 @@ package com.appnutricare.controller;
 
 import com.appnutricare.entities.Nutritionist;
 import com.appnutricare.entities.ProfessionalProfile;
+import com.appnutricare.repository.IProfessionalSpecialtiesRepository;
 import com.appnutricare.service.IRecipeService;
+import com.appnutricare.service.ISpecialtyService;
 import com.appnutricare.service.impl.ProfessionalProfileServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,6 +33,10 @@ public class ProfessionalProfileControllerTest {
     private MockMvc mockMvc;
     @MockBean
     private ProfessionalProfileServiceImpl professionalProfileService;
+    @MockBean
+    private ISpecialtyService specialtyService;
+    @MockBean
+    private IProfessionalSpecialtiesRepository professionalSpecialtiesRepository;
 
     private List<ProfessionalProfile> profileList;
 

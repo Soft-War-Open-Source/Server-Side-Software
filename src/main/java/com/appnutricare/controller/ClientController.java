@@ -248,6 +248,27 @@ public class ClientController {
         }
     }
 
+    @DeleteMapping(value = "/{recipe_id}/{client_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Eliminación de un Recipe de la lista de favoritos de un Client", notes = "Método para eliminar un Recipe de la lista de favoritos de un Client")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Recipe eliminado"),
+            @ApiResponse(code = 404, message = "Recipe no encontrado")
+    })
+    public ResponseEntity<Client> deleteClientFavoriteRecipe(@PathVariable("recipe_id") Integer recipe_id,
+                                                             @PathVariable("client_id") Integer client_id)
+    {
+        try{
+            ClientFavoriteRecipesFK newFKS = new ClientFavoriteRecipesFK(client_id, recipe_id);
+            Optional<ClientFavoriteRecipes> clientFavoriteRecipes = clientFavoriteRecipesRepository.findById(newFKS);
+            if(!clientFavoriteRecipes.isPresent())
+                return new ResponseEntity<Client>(HttpStatus.NOT_FOUND);
+            clientFavoriteRecipesRepository.delete(clientFavoriteRecipes.get());
+            return new ResponseEntity<Client>(HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<Client>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     public static Date ParseDate(String date){
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date result = null;

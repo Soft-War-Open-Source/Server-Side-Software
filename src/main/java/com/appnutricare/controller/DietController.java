@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Date;
@@ -159,6 +160,27 @@ public class DietController {
             return new ResponseEntity<List<Recipe>>(recipes, HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<List<Recipe>>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping(value = "/{recipe_id}/{diet_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Eliminación de un Recipe de un Diet", notes = "Método para eliminar un Recipe de un Diet")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Recipe eliminado"),
+            @ApiResponse(code = 404, message = "Recipe no encontrado")
+    })
+    public ResponseEntity<Diet> deleteRecipeFromDiet(@PathVariable("recipe_id") Integer recipe_id,
+                                                             @PathVariable("diet_id") Integer diet_id)
+    {
+        try{
+            DietRecipesFK newFKS = new DietRecipesFK(diet_id, recipe_id);
+            Optional<DietRecipes> dietRecipes = dietRecipesRepository.findById(newFKS);
+            if(!dietRecipes.isPresent())
+                return new ResponseEntity<Diet>(HttpStatus.NOT_FOUND);
+            dietRecipesRepository.delete(dietRecipes.get());
+            return new ResponseEntity<Diet>(HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<Diet>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

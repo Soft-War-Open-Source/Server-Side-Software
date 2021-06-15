@@ -165,4 +165,25 @@ public class ProfessionalProfileController {
         }
     }
 
+    @DeleteMapping(value = "/{specialty_id}/{professional_profile_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Eliminación de un Specialty de un ProfessionalProfile", notes = "Método para eliminar un Specialty de un ProfessionalProfile")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Specialty eliminado"),
+            @ApiResponse(code = 404, message = "Specialty no encontrado")
+    })
+    public ResponseEntity<ProfessionalProfile> deleteSpecialtyFromProfessionalProfile(@PathVariable("specialty_id") Integer specialty_id,
+                                                     @PathVariable("professional_profile_id") Integer professional_profile_id)
+    {
+        try{
+            ProfessionalSpecialtiesFK newFKS = new ProfessionalSpecialtiesFK(professional_profile_id, specialty_id);
+            Optional<ProfessionalSpecialties> professionalSpecialties = professionalSpecialtiesRepository.findById(newFKS);
+            if(!professionalSpecialties.isPresent())
+                return new ResponseEntity<ProfessionalProfile>(HttpStatus.NOT_FOUND);
+            professionalSpecialtiesRepository.delete(professionalSpecialties.get());
+            return new ResponseEntity<ProfessionalProfile>(HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<ProfessionalProfile>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }
