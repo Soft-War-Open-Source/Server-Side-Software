@@ -19,6 +19,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/PaymentMethods")
 @Api(tags="PaymentMethod", value = "Servicio Web RESTFul de PaymentMethod")

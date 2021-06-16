@@ -21,6 +21,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/professional_profile")
 @Api(tags = "Profesional Profile", value = "Servicio Web RESTful de Profesional_profiles")
