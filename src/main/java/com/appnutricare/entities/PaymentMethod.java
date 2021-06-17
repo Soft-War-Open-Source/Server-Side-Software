@@ -28,6 +28,9 @@ public class PaymentMethod implements Serializable {
     @Column(name="card_type", nullable = false, length = 50)
     private String cardType;
 
+    @Column(name="card_number", nullable = false)
+    private Integer cardNumber;
+
     @Column(name="exporation_date_month", nullable = false)
     private Integer expirationDateMonth;
 
