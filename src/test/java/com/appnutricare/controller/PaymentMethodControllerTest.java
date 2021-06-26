@@ -38,13 +38,13 @@ public class PaymentMethodControllerTest {
         Client client = new Client(1,"JosueCuentas1","123","Josue1",
                 "Cuentas1","josue1.c1012gmail.com",ParseDate("2017-07-21 17:32:28"));
         paymentMethodList = new ArrayList<>();
-        paymentMethodList.add(new PaymentMethod(1, client, "Visa", 123456, 25, 2022, 175,
+        paymentMethodList.add(new PaymentMethod(1, client, "Visa", 123456L, 25, 2022, 175,
                 "Pepito", "Capo", "Lima","Somewhere", "Somewhere2",
                 "Lima123", "Peru",123456789));
-        paymentMethodList.add(new PaymentMethod(2, client, "Visa", 123456, 25, 2022, 175,
+        paymentMethodList.add(new PaymentMethod(2, client, "Visa", 123456L, 25, 2022, 175,
                 "Pepito", "Capo", "Lima","Somewhere", "Somewhere2",
                 "Lima123", "Peru",123456789));
-        paymentMethodList.add(new PaymentMethod(3, client, "Visa", 123456, 25, 2022, 175,
+        paymentMethodList.add(new PaymentMethod(3, client, "Visa", 123456L, 25, 2022, 175,
                 "Pepito", "Capo", "Lima","Somewhere", "Somewhere2",
                 "Lima123", "Peru",123456789));
     }
@@ -60,7 +60,7 @@ public class PaymentMethodControllerTest {
         Integer paymentMethodId = 1;
         Client client = new Client(1,"JosueCuentas1","123","Josue1",
                 "Cuentas1","josue1.c1012gmail.com",ParseDate("2017-07-21 17:32:28"));
-        PaymentMethod paymentMethod = new PaymentMethod(1, client, "Visa", 123456, 25, 2022, 175,
+        PaymentMethod paymentMethod = new PaymentMethod(1, client, "Visa", 123456L, 25, 2022, 175,
                 "Pepito", "Capo", "Lima","Somewhere", "Somewhere2",
                 "Lima123", "Peru",123456789);
         given(paymentMethodService.getById(paymentMethodId)).willReturn(Optional.of(paymentMethod));
@@ -72,7 +72,7 @@ public class PaymentMethodControllerTest {
         Integer clientId = 1;
         Client client = new Client(1,"JosueCuentas1","123","Josue1",
                 "Cuentas1","josue1.c1012gmail.com",ParseDate("2017-07-21 17:32:28"));
-        PaymentMethod paymentMethod = new PaymentMethod(1, client, "Visa", 123456, 25, 2022, 175,
+        PaymentMethod paymentMethod = new PaymentMethod(1, client, "Visa", 123456L, 25, 2022, 175,
                 "Pepito", "Capo", "Lima","Somewhere", "Somewhere2",
                 "Lima123", "Peru",123456789);
         given(paymentMethodService.findAllByClient(clientId)).willReturn(paymentMethodList);

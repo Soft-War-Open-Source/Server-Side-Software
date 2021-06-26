@@ -19,7 +19,7 @@ import java.util.List;
 @NamedQuery(name="Customer.findByFirstName",query = "select  r from Recipe r where r.name= ?1")
 public class Recipe implements Serializable {
 
-        public Recipe(Integer id, String name, String descripcion, String preparation, String ingredients, Long favorite, Date created_at, Date last_modification, Nutritionist nutritionist) {
+        public Recipe(Integer id, String name, String descripcion, String preparation, String ingredients, Integer favorite, Date created_at, Date last_modification, Nutritionist nutritionist) {
                 this.id = id;
                 this.name = name;
                 this.descripcion = descripcion;
@@ -42,8 +42,8 @@ public class Recipe implements Serializable {
         private String preparation;
         @Column(name="ingredients", nullable = false, length = 500)
         private String ingredients;
-        @Column(name="favorite", nullable = true, length = 10)
-        private Long favorite;
+        @Column(name="favorite", nullable = true)
+        private Integer favorite;
         @Column(name="created_at", nullable = false)
         @Temporal(TemporalType.TIMESTAMP)
         private Date created_at;

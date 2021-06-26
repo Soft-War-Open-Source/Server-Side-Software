@@ -1,6 +1,7 @@
 package com.appnutricare.service;
 
 import com.appnutricare.entities.Appointment;
+import com.appnutricare.entities.Diet;
 
 import java.util.Date;
 import java.util.List;

@@ -4,6 +4,7 @@ import com.appnutricare.entities.Appointment;
 import com.appnutricare.entities.Diet;
 import com.appnutricare.entities.Recommendation;
 import com.appnutricare.service.IAppointmentService;
+import com.appnutricare.service.IDietService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -28,6 +29,8 @@ public class AppointmentController {
 
     @Autowired
     private IAppointmentService appointmentService;
+    @Autowired
+    private IDietService dietService;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Registro de Appointments", notes = "Método que registra Appointments en BD")
@@ -37,6 +40,8 @@ public class AppointmentController {
     })
     public ResponseEntity<Appointment> insertAppointment(@Valid @RequestBody Appointment appointment) {
         try {
+            Diet newDiet = dietService.save(new Diet(appointment.getId(), "", "", appointment.getAppointmentDate()));
+            appointment.setDiet(newDiet);
             Appointment appointmentNew = appointmentService.save(appointment);
             return ResponseEntity.status(HttpStatus.CREATED).body(appointmentNew);
         } catch (Exception e) {
@@ -156,15 +161,17 @@ public class AppointmentController {
             @ApiResponse(code=404, message = "Appointment no encontrado")
     })
     public ResponseEntity<Appointment> updateAppointmentNotes(@PathVariable("id") Integer id,
-                                                             @Valid @RequestBody String notes){
+                                                              @Valid @RequestBody Appointment appointment,
+                                                              @RequestParam("notes") String notes){
         try{
             Optional<Appointment> appointmentOld = appointmentService.getById(id); //Se encuentra un appointment
             if(!appointmentOld.isPresent()) {
                 return new ResponseEntity<Appointment>(HttpStatus.NOT_FOUND);
             }
             else { //Si es así, se actualiza con nuevos datos
-                appointmentOld.get().setNutritionistNotes(notes);
-                appointmentService.save(appointmentOld.get());
+                appointment.setId(id);
+                appointment.setNutritionistNotes(notes);
+                appointmentService.save(appointment);
                 return new ResponseEntity<Appointment>(HttpStatus.OK);
             }
         }catch (Exception e){

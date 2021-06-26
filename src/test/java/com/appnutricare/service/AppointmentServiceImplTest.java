@@ -4,6 +4,7 @@ import com.appnutricare.entities.*;
 import com.appnutricare.repository.IAppointmentRepository;
 import com.appnutricare.repository.IClientRepository;
 import com.appnutricare.service.impl.AppointmentServiceImpl;
+import com.appnutricare.service.impl.DietServiceImpl;
 import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -29,7 +29,7 @@ public class PaymentMethod implements Serializable {
     private String cardType;
 
     @Column(name="card_number", nullable = false)
-    private Integer cardNumber;
+    private Long cardNumber;
 
     @Column(name="exporation_date_month", nullable = false)
     private Integer expirationDateMonth;

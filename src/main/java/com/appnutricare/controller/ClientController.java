@@ -211,7 +211,8 @@ public class ClientController {
     })
     public ResponseEntity<ClientFavoriteRecipes> addFavoriteRecipe(@PathVariable("recipe_id") Integer recipe_id,
                                                     @PathVariable("client_id") Integer client_id,
-                                                    @Valid @RequestBody String date){
+                                                    @Valid @RequestBody Client client,
+                                                    @RequestParam("date") String date){
         try {
             Date currentDate = ParseDate(date);
             Optional<Recipe> foundRecipe = recipeService.getById(recipe_id);

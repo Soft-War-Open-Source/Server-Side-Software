@@ -2,6 +2,7 @@ package com.appnutricare.controller;
 
 import com.appnutricare.entities.*;
 import com.appnutricare.service.impl.AppointmentServiceImpl;
+import com.appnutricare.service.impl.DietServiceImpl;
 import com.appnutricare.service.impl.NutritionistServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,6 +34,8 @@ public class AppointmentControllerTest {
 
     @MockBean
     private AppointmentServiceImpl appointmentService;
+    @MockBean
+    private DietServiceImpl dietService;
 
     private List<Appointment> appointmentList;
     private List<Client> clientList;
