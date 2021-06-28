@@ -1,7 +1,6 @@
 package com.appnutricare.controller;
 
 import com.appnutricare.entities.Nutritionist;
-import com.appnutricare.entities.ProfessionalProfile;
 import com.appnutricare.service.impl.NutritionistServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,24 +31,17 @@ public class NutritionistControllerTest {
     private NutritionistServiceImpl nutritionistService;
 
     private List<Nutritionist> nutritionistList;
-    private List<ProfessionalProfile> professionalProfileList;
 
     @BeforeEach
     void setUp(){
-        professionalProfileList = new ArrayList<>();
-        professionalProfileList.add(new ProfessionalProfile(1, "description 1"));
-        professionalProfileList.add(new ProfessionalProfile(2, "description 2"));
-        professionalProfileList.add(new ProfessionalProfile(3, "description 3"));
-        professionalProfileList.add(new ProfessionalProfile(4, "description 4"));
-
         nutritionistList = new ArrayList<>();
-        nutritionistList.add(new Nutritionist(1, professionalProfileList.get(0), "pepito1", "pepito123",
+        nutritionistList.add(new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"))); //.10000
-        nutritionistList.add(new Nutritionist(2, professionalProfileList.get(1), "pepito2", "pepito123",
+        nutritionistList.add(new Nutritionist(2, "pepito2", "pepito123",
                 "Jose2", "Perez2", "pepito2@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"))); //.10000
-        nutritionistList.add(new Nutritionist(3, professionalProfileList.get(2), "pepito3", "pepito123",
+        nutritionistList.add(new Nutritionist(3, "pepito3", "pepito123",
                 "Jose3", "Perez3", "pepito3@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"))); //.10000
-        nutritionistList.add(new Nutritionist(4, professionalProfileList.get(3), "pepito4", "pepito123",
+        nutritionistList.add(new Nutritionist(4, "pepito4", "pepito123",
                 "Jose4", "Perez4", "pepito4@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"))); //.10000
     }
 
@@ -62,7 +54,7 @@ public class NutritionistControllerTest {
     @Test
     void findNutritionistById() throws Exception{
         Integer NutritionistId = 1;
-        Nutritionist nutritionist = new Nutritionist(1, professionalProfileList.get(0), "pepito1", "pepito123",
+        Nutritionist nutritionist = new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28")); //.10000
         given(nutritionistService.getById(NutritionistId)).willReturn(Optional.of(nutritionist));
         mockMvc.perform(get("/api/nutritionist/{id}", nutritionist.getId())).andExpect(status().isOk());
@@ -71,7 +63,7 @@ public class NutritionistControllerTest {
     @Test
     void findNutritionistByUserName() throws Exception{
         String NutritionistUsername = "pepito1";
-        Nutritionist nutritionist = new Nutritionist(1, professionalProfileList.get(0), "pepito1", "pepito123",
+        Nutritionist nutritionist = new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28")); //.10000
         given(nutritionistService.findByUsername(NutritionistUsername)).willReturn(nutritionist);
         mockMvc.perform(get("/api/nutritionist/searchByUsername/{username}", nutritionist.getUsername())).andExpect(status().isOk());
@@ -80,7 +72,7 @@ public class NutritionistControllerTest {
     @Test
     void findNutritionistByCpnNumber() throws Exception{
         Integer NutritionistCpnNumber = 123456;
-        Nutritionist nutritionist = new Nutritionist(1, professionalProfileList.get(0), "pepito1", "pepito123",
+        Nutritionist nutritionist = new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28")); //.10000
         given(nutritionistService.findByCnpNumber(NutritionistCpnNumber)).willReturn(nutritionist);
         mockMvc.perform(get("/api/nutritionist/searchByCnpNumber/{cnp_number}", nutritionist.getCnpNumber())).andExpect(status().isOk());
@@ -89,7 +81,7 @@ public class NutritionistControllerTest {
     @Test
     void findNutritionistByFirstName() throws Exception{
         String NutritionistFirstname = "Jose1";
-        Nutritionist nutritionist = new Nutritionist(1, professionalProfileList.get(0), "pepito1", "pepito123",
+        Nutritionist nutritionist = new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28")); //.10000
         given(nutritionistService.findByFirstName(NutritionistFirstname)).willReturn(nutritionistList);
         mockMvc.perform(get("/api/nutritionist/searchByFirstname/{firstname}", nutritionist.getFirstName())).andExpect(status().isOk());
@@ -98,7 +90,7 @@ public class NutritionistControllerTest {
     @Test
     void findNutritionistByLastName() throws Exception{
         String NutritionistLastname = "Perez1";
-        Nutritionist nutritionist = new Nutritionist(1, professionalProfileList.get(0), "pepito1", "pepito123",
+        Nutritionist nutritionist = new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28")); //.10000
         given(nutritionistService.findByLastName(NutritionistLastname)).willReturn(nutritionistList);
         mockMvc.perform(get("/api/nutritionist/searchByLastname/{lastname}", nutritionist.getLastName())).andExpect(status().isOk());
@@ -108,7 +100,7 @@ public class NutritionistControllerTest {
     void findNutritionistByFirstAndLastName() throws Exception{
         String NutritionistFirstname = "Jose1";
         String NutritionistLastname = "Perez1";
-        Nutritionist nutritionist = new Nutritionist(1, professionalProfileList.get(0), "pepito1", "pepito123",
+        Nutritionist nutritionist = new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28")); //.10000
         given(nutritionistService.findByFirstNameAndLastName(NutritionistFirstname, NutritionistLastname)).willReturn(nutritionistList);
         mockMvc.perform(get("/api/nutritionist/searchByFirstnameAndLastname/{firstname}/{lastname}", nutritionist.getFirstName(), nutritionist.getLastName())).andExpect(status().isOk());

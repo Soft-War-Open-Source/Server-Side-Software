@@ -34,8 +34,7 @@ public class NutritionistServiceImplTest {
 
     @Test
     public void saveTest(){
-        ProfessionalProfile professionalProfile = new ProfessionalProfile(1, "description1");
-        Nutritionist nutritionist = new Nutritionist(1, professionalProfile, "pepito1", "pepito123",
+        Nutritionist nutritionist = new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28")); //.10000
         given(nutritionistRepository.save(nutritionist)).willReturn(nutritionist);
 
@@ -59,8 +58,7 @@ public class NutritionistServiceImplTest {
     @Test
     void findByIdTest() throws Exception {
         Integer id = 1;
-        ProfessionalProfile professionalProfile = new ProfessionalProfile(1, "description1");
-        Nutritionist nutritionist = new Nutritionist(1, professionalProfile, "pepito1", "pepito123",
+        Nutritionist nutritionist = new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28")); //.10000
         given(nutritionistRepository.findById(id)).willReturn(Optional.of(nutritionist));
 
@@ -72,22 +70,14 @@ public class NutritionistServiceImplTest {
     @Test
     void findAllTest() throws Exception {
         List<Nutritionist> nutritionistList;
-        List<ProfessionalProfile> professionalProfileList;
-
-        professionalProfileList = new ArrayList<>();
-        professionalProfileList.add(new ProfessionalProfile(1, "description 1"));
-        professionalProfileList.add(new ProfessionalProfile(2, "description 2"));
-        professionalProfileList.add(new ProfessionalProfile(3, "description 3"));
-        professionalProfileList.add(new ProfessionalProfile(4, "description 4"));
-
         nutritionistList = new ArrayList<>();
-        nutritionistList.add(new Nutritionist(1, professionalProfileList.get(0), "pepito1", "pepito123",
+        nutritionistList.add(new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"))); //.10000
-        nutritionistList.add(new Nutritionist(2, professionalProfileList.get(1), "pepito2", "pepito123",
+        nutritionistList.add(new Nutritionist(2, "pepito2", "pepito123",
                 "Jose2", "Perez2", "pepito2@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"))); //.10000
-        nutritionistList.add(new Nutritionist(3, professionalProfileList.get(2), "pepito3", "pepito123",
+        nutritionistList.add(new Nutritionist(3, "pepito3", "pepito123",
                 "Jose3", "Perez3", "pepito3@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"))); //.10000
-        nutritionistList.add(new Nutritionist(4, professionalProfileList.get(3), "pepito4", "pepito123",
+        nutritionistList.add(new Nutritionist(4, "pepito4", "pepito123",
                 "Jose4", "Perez4", "pepito4@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"))); //.10000
 
         given(nutritionistRepository.findAll()).willReturn(nutritionistList);
@@ -98,8 +88,7 @@ public class NutritionistServiceImplTest {
     @Test
     void findByUsernameTest() throws Exception {
         String Username = "pepito1";
-        ProfessionalProfile professionalProfile = new ProfessionalProfile(1, "description1");
-        Nutritionist nutritionist = new Nutritionist(1, professionalProfile, "pepito1", "pepito123",
+        Nutritionist nutritionist = new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28")); //.10000
         given(nutritionistRepository.findByUsername(Username)).willReturn(nutritionist);
         Nutritionist expected = nutritionistService.findByUsername(Username);
@@ -109,8 +98,7 @@ public class NutritionistServiceImplTest {
     @Test
     void findByCnpNumberTest() throws Exception {
         Integer CnpNumber = 123456;
-        ProfessionalProfile professionalProfile = new ProfessionalProfile(1, "description1");
-        Nutritionist nutritionist = new Nutritionist(1, professionalProfile, "pepito1", "pepito123",
+        Nutritionist nutritionist = new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28")); //.10000
         given(nutritionistRepository.findByCnpNumber(CnpNumber)).willReturn(nutritionist);
         Nutritionist expected = nutritionistService.findByCnpNumber(CnpNumber);
@@ -121,22 +109,15 @@ public class NutritionistServiceImplTest {
     void findByFirstnameTest() throws Exception {
         String FirstName = "Jose1";
         List<Nutritionist> nutritionistList;
-        List<ProfessionalProfile> professionalProfileList;
-
-        professionalProfileList = new ArrayList<>();
-        professionalProfileList.add(new ProfessionalProfile(1, "description 1"));
-        professionalProfileList.add(new ProfessionalProfile(2, "description 2"));
-        professionalProfileList.add(new ProfessionalProfile(3, "description 3"));
-        professionalProfileList.add(new ProfessionalProfile(4, "description 4"));
 
         nutritionistList = new ArrayList<>();
-        nutritionistList.add(new Nutritionist(1, professionalProfileList.get(0), "pepito1", "pepito123",
+        nutritionistList.add(new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"))); //.10000
-        nutritionistList.add(new Nutritionist(2, professionalProfileList.get(1), "pepito2", "pepito123",
+        nutritionistList.add(new Nutritionist(2, "pepito2", "pepito123",
                 "Jose2", "Perez2", "pepito2@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"))); //.10000
-        nutritionistList.add(new Nutritionist(3, professionalProfileList.get(2), "pepito3", "pepito123",
+        nutritionistList.add(new Nutritionist(3, "pepito3", "pepito123",
                 "Jose3", "Perez3", "pepito3@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"))); //.10000
-        nutritionistList.add(new Nutritionist(4, professionalProfileList.get(3), "pepito4", "pepito123",
+        nutritionistList.add(new Nutritionist(4, "pepito4", "pepito123",
                 "Jose4", "Perez4", "pepito4@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"))); //.10000
 
         given(nutritionistRepository.findByFirstName(FirstName)).willReturn(nutritionistList);
@@ -148,22 +129,15 @@ public class NutritionistServiceImplTest {
     void findByLastnameTest() throws Exception {
         String LastName = "Perez1";
         List<Nutritionist> nutritionistList;
-        List<ProfessionalProfile> professionalProfileList;
-
-        professionalProfileList = new ArrayList<>();
-        professionalProfileList.add(new ProfessionalProfile(1, "description 1"));
-        professionalProfileList.add(new ProfessionalProfile(2, "description 2"));
-        professionalProfileList.add(new ProfessionalProfile(3, "description 3"));
-        professionalProfileList.add(new ProfessionalProfile(4, "description 4"));
 
         nutritionistList = new ArrayList<>();
-        nutritionistList.add(new Nutritionist(1, professionalProfileList.get(0), "pepito1", "pepito123",
+        nutritionistList.add(new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"))); //.10000
-        nutritionistList.add(new Nutritionist(2, professionalProfileList.get(1), "pepito2", "pepito123",
+        nutritionistList.add(new Nutritionist(2, "pepito2", "pepito123",
                 "Jose2", "Perez2", "pepito2@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"))); //.10000
-        nutritionistList.add(new Nutritionist(3, professionalProfileList.get(2), "pepito3", "pepito123",
+        nutritionistList.add(new Nutritionist(3, "pepito3", "pepito123",
                 "Jose3", "Perez3", "pepito3@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"))); //.10000
-        nutritionistList.add(new Nutritionist(4, professionalProfileList.get(3), "pepito4", "pepito123",
+        nutritionistList.add(new Nutritionist(4, "pepito4", "pepito123",
                 "Jose4", "Perez4", "pepito4@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"))); //.10000
 
         given(nutritionistRepository.findByLastName(LastName)).willReturn(nutritionistList);
@@ -176,22 +150,15 @@ public class NutritionistServiceImplTest {
         String FirstName = "Jose1";
         String LastName = "Perez1";
         List<Nutritionist> nutritionistList;
-        List<ProfessionalProfile> professionalProfileList;
-
-        professionalProfileList = new ArrayList<>();
-        professionalProfileList.add(new ProfessionalProfile(1, "description 1"));
-        professionalProfileList.add(new ProfessionalProfile(2, "description 2"));
-        professionalProfileList.add(new ProfessionalProfile(3, "description 3"));
-        professionalProfileList.add(new ProfessionalProfile(4, "description 4"));
 
         nutritionistList = new ArrayList<>();
-        nutritionistList.add(new Nutritionist(1, professionalProfileList.get(0), "pepito1", "pepito123",
+        nutritionistList.add(new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"))); //.10000
-        nutritionistList.add(new Nutritionist(2, professionalProfileList.get(1), "pepito2", "pepito123",
+        nutritionistList.add(new Nutritionist(2, "pepito2", "pepito123",
                 "Jose2", "Perez2", "pepito2@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"))); //.10000
-        nutritionistList.add(new Nutritionist(3, professionalProfileList.get(2), "pepito3", "pepito123",
+        nutritionistList.add(new Nutritionist(3, "pepito3", "pepito123",
                 "Jose3", "Perez3", "pepito3@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"))); //.10000
-        nutritionistList.add(new Nutritionist(4, professionalProfileList.get(3), "pepito4", "pepito123",
+        nutritionistList.add(new Nutritionist(4, "pepito4", "pepito123",
                 "Jose4", "Perez4", "pepito4@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"))); //.10000
 
         given(nutritionistRepository.findByFirstNameAndLastName(FirstName, LastName)).willReturn(nutritionistList);

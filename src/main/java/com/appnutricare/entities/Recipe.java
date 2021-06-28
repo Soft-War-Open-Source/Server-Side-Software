@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="Recipe")
@@ -17,6 +18,18 @@ import java.util.Date;
 @AllArgsConstructor
 @NamedQuery(name="Customer.findByFirstName",query = "select  r from Recipe r where r.name= ?1")
 public class Recipe implements Serializable {
+
+        public Recipe(Integer id, String name, String descripcion, String preparation, String ingredients, Integer favorite, Date created_at, Date last_modification, Nutritionist nutritionist) {
+                this.id = id;
+                this.name = name;
+                this.descripcion = descripcion;
+                this.preparation = preparation;
+                this.ingredients = ingredients;
+                this.favorite = favorite;
+                this.created_at = created_at;
+                this.last_modification = last_modification;
+                this.nutritionist = nutritionist;
+        }
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,8 +42,8 @@ public class Recipe implements Serializable {
         private String preparation;
         @Column(name="ingredients", nullable = false, length = 500)
         private String ingredients;
-        @Column(name="favorite", nullable = true, length = 10)
-        private Long favorite;
+        @Column(name="favorite", nullable = true)
+        private Integer favorite;
         @Column(name="created_at", nullable = false)
         @Temporal(TemporalType.TIMESTAMP)
         private Date created_at;
@@ -44,6 +57,9 @@ public class Recipe implements Serializable {
         @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
         private Nutritionist nutritionist;
 
+        @OneToMany(mappedBy = "recipe")
+        private List<ClientFavoriteRecipes> recipeClientAssoc;
 
-
+        @OneToMany(mappedBy = "recipe")
+        private List<DietRecipes> recipeDietAssoc;
 }

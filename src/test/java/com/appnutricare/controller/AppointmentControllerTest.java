@@ -2,6 +2,7 @@ package com.appnutricare.controller;
 
 import com.appnutricare.entities.*;
 import com.appnutricare.service.impl.AppointmentServiceImpl;
+import com.appnutricare.service.impl.DietServiceImpl;
 import com.appnutricare.service.impl.NutritionistServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,10 +34,10 @@ public class AppointmentControllerTest {
 
     @MockBean
     private AppointmentServiceImpl appointmentService;
-    //private NutritionistServiceImpl nutritionistService;
+    @MockBean
+    private DietServiceImpl dietService;
 
     private List<Appointment> appointmentList;
-    private List<ProfessionalProfile> professionalProfileList;
     private List<Client> clientList;
     private List<Nutritionist> nutritionistList;
     private List<Diet> dietList;
@@ -44,20 +45,17 @@ public class AppointmentControllerTest {
     @BeforeEach
     void setUp(){
         appointmentList = new ArrayList<>();
-        professionalProfileList = new ArrayList<>();
         clientList = new ArrayList<>();
         nutritionistList = new ArrayList<>();
         dietList = new ArrayList<>();
 
-        professionalProfileList.add(new ProfessionalProfile(1, "description1"));
-        professionalProfileList.add(new ProfessionalProfile(2, "description2"));
         clientList.add(new Client(1, "pepitoasd1", "pepitoasd123", "Joseasd1", "Perezasd1",
                 "pepitoasd1@upc.edu.pe", ParseDate("2017-07-21 17:32:28"))); //.10000
         clientList.add(new Client(2, "pepitoasd1", "pepitoasd123", "Joseasd1", "Perezasd1",
                 "pepitoasd1@upc.edu.pe", ParseDate("2017-07-21 17:32:28"))); //.10000
-        nutritionistList.add(new Nutritionist(1, professionalProfileList.get(0), "pepito1", "pepito123",
+        nutritionistList.add(new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"))); //.10000
-        nutritionistList.add(new Nutritionist(2, professionalProfileList.get(1), "pepito1", "pepito123",
+        nutritionistList.add(new Nutritionist(2, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"))); //.10000
         dietList.add(new Diet(1, "diet1", "description1", ParseDate("2017-07-21 17:32:28")));
         dietList.add(new Diet(2, "diet1", "description1", ParseDate("2017-07-21 17:32:28")));
@@ -66,10 +64,6 @@ public class AppointmentControllerTest {
                 ParseDate("2017-07-21 17:32:28"), "notes1"));
         appointmentList.add(new Appointment(2, clientList.get(1), nutritionistList.get(1), dietList.get(1), ParseDate("2017-07-21 17:32:28"),
                 ParseDate("2017-07-21 17:32:28"), "notes2"));
-//        appointmentList.add(new Appointment(3, client, nutritionist, diet, ParseDate("2017-07-21 17:32:28"),
-//                ParseDate("2017-07-21 17:32:28"), "notes3"));
-//        appointmentList.add(new Appointment(4, client, nutritionist, diet, ParseDate("2017-07-21 17:32:28"),
-//                ParseDate("2017-07-21 17:32:28"), "notes4"));
     }
 
     @Test
@@ -81,10 +75,9 @@ public class AppointmentControllerTest {
     @Test
     void findAppointmentById() throws Exception{
         Integer AppointmentId = 1;
-        ProfessionalProfile professionalProfile = new ProfessionalProfile(1, "description 1");
         Client client = new Client(1, "pepito1", "pepito123", "Jose1", "Perez1",
                 "pepito1@upc.edu.pe", ParseDate("2017-07-21 17:32:28")); //.10000
-        Nutritionist nutritionist = new Nutritionist(1, professionalProfile, "pepito1", "pepito123",
+        Nutritionist nutritionist = new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28")); //.10000
         Diet diet = new Diet(1, "diet1", "description1", ParseDate("2017-07-21 17:32:28"));
 
@@ -107,10 +100,9 @@ public class AppointmentControllerTest {
     @Test
     void findAppointmentByNutritionist() throws Exception{
         Integer NutritionistId = 1;
-        ProfessionalProfile professionalProfile = new ProfessionalProfile(1, "description 1");
         Client client = new Client(1, "pepito1", "pepito123", "Jose1", "Perez1",
                 "pepito1@upc.edu.pe", ParseDate("2017-07-21 17:32:28")); //.10000
-        Nutritionist nutritionist = new Nutritionist(1, professionalProfile, "pepito1", "pepito123",
+        Nutritionist nutritionist = new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28")); //.10000
         Diet diet = new Diet(1, "diet1", "description1", ParseDate("2017-07-21 17:32:28"));
 
@@ -123,10 +115,9 @@ public class AppointmentControllerTest {
     @Test
     void findAppointmentByClient() throws Exception{
         Integer ClientId = 1;
-        ProfessionalProfile professionalProfile = new ProfessionalProfile(1, "description 1");
         Client client = new Client(1, "pepito1", "pepito123", "Jose1", "Perez1",
                 "pepito1@upc.edu.pe", ParseDate("2017-07-21 17:32:28")); //.10000
-        Nutritionist nutritionist = new Nutritionist(1, professionalProfile, "pepito1", "pepito123",
+        Nutritionist nutritionist = new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28")); //.10000
         Diet diet = new Diet(1, "diet1", "description1", ParseDate("2017-07-21 17:32:28"));
 

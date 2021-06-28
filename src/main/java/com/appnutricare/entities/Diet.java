@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "diet")
@@ -14,6 +15,13 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Diet implements Serializable {
+
+    public Diet(Integer id, String name, String description, Date createAt) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.createAt = createAt;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,4 +34,6 @@ public class Diet implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createAt;
 
+    @OneToMany(mappedBy = "diet")
+    private List<DietRecipes> dietAssoc;
 }

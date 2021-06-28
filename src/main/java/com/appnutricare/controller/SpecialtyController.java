@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/specialty")
 @Api(tags = "Specialty", value = "Servicio Web RESTful de Specialtys")
@@ -88,7 +89,7 @@ public class SpecialtyController {
                 return new ResponseEntity<Specialty>(HttpStatus.NOT_FOUND);
             specialty.setId(id);
             specialtyService.save(specialty);
-            return new ResponseEntity<Specialty>(specialty,HttpStatus.OK);
+            return new ResponseEntity<Specialty>(specialty, HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<Specialty>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

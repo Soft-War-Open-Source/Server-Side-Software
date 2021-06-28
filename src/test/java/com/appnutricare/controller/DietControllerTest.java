@@ -3,9 +3,12 @@ package com.appnutricare.controller;
 
 
 import com.appnutricare.entities.Diet;
+import com.appnutricare.repository.IDietRecipesRepository;
+import com.appnutricare.service.IRecipeService;
 import com.appnutricare.service.impl.DietServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -30,6 +33,10 @@ public class DietControllerTest {
     private MockMvc mockMvc;
     @MockBean
     private DietServiceImpl dietService;
+    @MockBean
+    private IDietRecipesRepository dietRecipesRepository;
+    @MockBean
+    private IRecipeService recipeService;
 
     private List<Diet> dietList;
 

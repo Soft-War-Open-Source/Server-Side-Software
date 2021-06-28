@@ -32,8 +32,7 @@ public class RecommendationServiceImplTest {
     @Test
     public void saveTest()
     {
-        ProfessionalProfile professionalProfile = new ProfessionalProfile(1, "description1");
-        Nutritionist nutritionist = new Nutritionist(1, professionalProfile, "pepito1", "pepito123",
+        Nutritionist nutritionist = new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"));
         Recommendation recommendation = new Recommendation(1,"pera","descripcionRandom1",
                 ParseDate("2017-07-21 17:32:28"),ParseDate("2017-07-21 17:32:28"), nutritionist);
@@ -61,8 +60,7 @@ public class RecommendationServiceImplTest {
     void findByIdTest() throws Exception
     {
         Integer recommendationId = 1;
-        ProfessionalProfile professionalProfile = new ProfessionalProfile(1, "description1");
-        Nutritionist nutritionist = new Nutritionist(1, professionalProfile, "pepito1", "pepito123",
+        Nutritionist nutritionist = new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28")); //.10000
         Recommendation recommendation = new Recommendation(1,"pera","descripcionRandom1",
                 ParseDate("2017-07-21 17:32:28"),ParseDate("2017-07-21 17:32:28"), nutritionist);
@@ -76,23 +74,16 @@ public class RecommendationServiceImplTest {
     void findAllTest() throws Exception
     {
         List<Nutritionist> nutritionistList;
-        List<ProfessionalProfile> professionalProfileList;
         List<Recommendation> recommendationList;
 
-        professionalProfileList = new ArrayList<>();
-        professionalProfileList.add(new ProfessionalProfile(1, "description 1"));
-        professionalProfileList.add(new ProfessionalProfile(2, "description 2"));
-        professionalProfileList.add(new ProfessionalProfile(3, "description 3"));
-        professionalProfileList.add(new ProfessionalProfile(4, "description 4"));
-
         nutritionistList = new ArrayList<>();
-        nutritionistList.add(new Nutritionist(1, professionalProfileList.get(0), "pepito1", "pepito123",
+        nutritionistList.add(new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"))); //.10000
-        nutritionistList.add(new Nutritionist(2, professionalProfileList.get(1), "pepito2", "pepito123",
+        nutritionistList.add(new Nutritionist(2, "pepito2", "pepito123",
                 "Jose2", "Perez2", "pepito2@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"))); //.10000
-        nutritionistList.add(new Nutritionist(3, professionalProfileList.get(2), "pepito3", "pepito123",
+        nutritionistList.add(new Nutritionist(3, "pepito3", "pepito123",
                 "Jose3", "Perez3", "pepito3@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"))); //.10000
-        nutritionistList.add(new Nutritionist(4, professionalProfileList.get(3), "pepito4", "pepito123",
+        nutritionistList.add(new Nutritionist(4, "pepito4", "pepito123",
                 "Jose4", "Perez4", "pepito4@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"))); //.10000
 
         recommendationList = new ArrayList<>();
@@ -124,23 +115,16 @@ public class RecommendationServiceImplTest {
     void findByNameTest() throws Exception {
         String name = "pera";
         List<Nutritionist> nutritionistList;
-        List<ProfessionalProfile> professionalProfileList;
         List<Recommendation> recommendationList;
 
-        professionalProfileList = new ArrayList<>();
-        professionalProfileList.add(new ProfessionalProfile(1, "description 1"));
-        professionalProfileList.add(new ProfessionalProfile(2, "description 2"));
-        professionalProfileList.add(new ProfessionalProfile(3, "description 3"));
-        professionalProfileList.add(new ProfessionalProfile(4, "description 4"));
-
         nutritionistList = new ArrayList<>();
-        nutritionistList.add(new Nutritionist(1, professionalProfileList.get(0), "pepito1", "pepito123",
+        nutritionistList.add(new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"))); //.10000
-        nutritionistList.add(new Nutritionist(2, professionalProfileList.get(1), "pepito2", "pepito123",
+        nutritionistList.add(new Nutritionist(2, "pepito2", "pepito123",
                 "Jose2", "Perez2", "pepito2@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"))); //.10000
-        nutritionistList.add(new Nutritionist(3, professionalProfileList.get(2), "pepito3", "pepito123",
+        nutritionistList.add(new Nutritionist(3, "pepito3", "pepito123",
                 "Jose3", "Perez3", "pepito3@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"))); //.10000
-        nutritionistList.add(new Nutritionist(4, professionalProfileList.get(3), "pepito4", "pepito123",
+        nutritionistList.add(new Nutritionist(4, "pepito4", "pepito123",
                 "Jose4", "Perez4", "pepito4@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28"))); //.10000
 
         recommendationList = new ArrayList<>();
@@ -164,8 +148,7 @@ public class RecommendationServiceImplTest {
         String date2_string = "2022-07-21 17:32:28";
         Date date1 = ParseDate2(date1_string);
         Date date2 = ParseDate2(date2_string);
-        ProfessionalProfile professionalProfile = new ProfessionalProfile(1, "description 1");
-        Nutritionist nutritionist = new Nutritionist(1, professionalProfile, "pepito1", "pepito123",
+        Nutritionist nutritionist = new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21 17:32:28")); //.10000
         Recommendation recommendation = new Recommendation(1,"pera","descripcionRandom1",
                 ParseDate("2017-07-21 17:32:28"),ParseDate("2017-07-21 17:32:28"), nutritionist);

@@ -35,15 +35,14 @@ public class RecipeControllerTest {
 
     @BeforeEach
     void setUp(){
-        ProfessionalProfile professionalProfile = new ProfessionalProfile(1, "description1");
-        Nutritionist nutritionist = new Nutritionist(1, professionalProfile, "pepito1", "pepito123",
+        Nutritionist nutritionist = new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21"));
         recipeList = new ArrayList<>();
         recipeList.add(new Recipe(1,"Receta numero 1","La receta numero uno esta conpuesta de frutos etc",
-                "Paso1: asdasd, Paso2_asdasdas","Pera,mango,uva",1L,ParseDate("2017-07-21"),
+                "Paso1: asdasd, Paso2_asdasdas","Pera,mango,uva",123,ParseDate("2017-07-21"),
                 ParseDate("2017-07-21"),nutritionist));
         recipeList.add(new Recipe(2,"Receta numero 2","La receta numero dos esta conpuesta de frutos etc",
-                "Paso1: asdasd, Paso2_asdasdas","Pera,mango,uva",1L,ParseDate("2017-07-21"),
+                "Paso1: asdasd, Paso2_asdasdas","Pera,mango,uva",123,ParseDate("2017-07-21"),
                 ParseDate("2017-07-21"),nutritionist));
     }
 
@@ -56,12 +55,11 @@ public class RecipeControllerTest {
     @Test
     void findRecipeById() throws Exception{
         Integer recipeId = 1;
-        ProfessionalProfile professionalProfile = new ProfessionalProfile(1, "description1");
-        Nutritionist nutritionist = new Nutritionist(1, professionalProfile, "pepito1", "pepito123",
+        Nutritionist nutritionist = new Nutritionist(1, "pepito1", "pepito123",
                 "Jose1", "Perez1", "pepito1@upc.edu.pe", 123456, ParseDate("2017-07-21"));
 
         Recipe recipe = new Recipe(1,"Receta numero 1","La receta numero uno esta conpuesta de frutos etc",
-                "Paso1: asdasd, Paso2_asdasdas","Pera,mango,uva",1L,ParseDate("2017-07-21"),
+                "Paso1: asdasd, Paso2_asdasdas","Pera,mango,uva",123,ParseDate("2017-07-21"),
                 ParseDate("2017-07-21"),nutritionist);
       given(recipeService.getById(recipeId)).willReturn(Optional.of(recipe));
         mockMvc.perform(get("/api/Recipes/{id}", recipe.getId())).andExpect(status().isOk());

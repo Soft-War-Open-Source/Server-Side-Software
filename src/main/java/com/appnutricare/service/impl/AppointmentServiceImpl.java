@@ -54,4 +54,6 @@ public class AppointmentServiceImpl implements IAppointmentService {
     public List<Appointment> findByNutritionist(Integer nutritionist_id) throws Exception {
         return appointmentRepository.findByNutritionist(nutritionist_id);
     }
+
+
 }

@@ -21,6 +21,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/recommendation")
 @Api(tags = "Recommendation", value = "Servicio Web RESTful de Recommendation")
@@ -127,8 +128,8 @@ public class RecommendationController {
         try{
             List<Recommendation> recommendations = recommendationService.findByName(name);
             if(recommendations.size()>0)
-                return new ResponseEntity<List<Recommendation>>(HttpStatus.OK);
-            return new ResponseEntity<List<Recommendation>>(recommendations, HttpStatus.NOT_FOUND);
+                return new ResponseEntity<List<Recommendation>>(recommendations, HttpStatus.OK);
+            return new ResponseEntity<List<Recommendation>>(HttpStatus.NOT_FOUND);
         }catch (Exception e){
             return new ResponseEntity<List<Recommendation>>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -145,8 +146,8 @@ public class RecommendationController {
         try{
             List<Recommendation> recommendations = recommendationService.findByNutritionist(nutritionist_id);
             if(recommendations.size()>0)
-                return new ResponseEntity<List<Recommendation>>(HttpStatus.OK);
-            return new ResponseEntity<List<Recommendation>>(recommendations, HttpStatus.NOT_FOUND);
+                return new ResponseEntity<List<Recommendation>>(recommendations, HttpStatus.OK);
+            return new ResponseEntity<List<Recommendation>>(HttpStatus.NOT_FOUND);
         }catch (Exception e){
             return new ResponseEntity<List<Recommendation>>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

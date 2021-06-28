@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "client")
@@ -15,6 +16,17 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Client implements Serializable {
+
+    public Client(Integer id, String username, String password, String firstName, String lastName, String email, Date createdAt) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.createdAt = createdAt;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -31,4 +43,7 @@ public class Client implements Serializable {
     @Column(name="created_at", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
+
+    @OneToMany(mappedBy = "client")
+    private List<ClientFavoriteRecipes> clientAssoc;
 }
