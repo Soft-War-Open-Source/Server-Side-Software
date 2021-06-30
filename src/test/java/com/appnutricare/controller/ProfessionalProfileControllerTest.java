@@ -65,7 +65,7 @@ public class ProfessionalProfileControllerTest {
     @Test
     void findAllProfessionalProfiles() throws Exception{
         given(professionalProfileService.getAll()).willReturn(profileList);
-        mockMvc.perform(get("/api/professional_profile")).andExpect(status().isOk());
+        mockMvc.perform(get("/api/ProfessionalProfiles")).andExpect(status().isOk());
     }
 
     @Test
@@ -77,7 +77,7 @@ public class ProfessionalProfileControllerTest {
 
         given(professionalProfileService.getById(ProfessionalId)).willReturn(Optional.of(professionalProfile));
 
-        mockMvc.perform(get("/api/professional_profile/{id}", professionalProfile.getId())).andExpect(status().isOk());
+        mockMvc.perform(get("/api/ProfessionalProfiles/{id}", professionalProfile.getId())).andExpect(status().isOk());
     }
 
     public static Date ParseDate(String date){
