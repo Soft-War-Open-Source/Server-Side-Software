@@ -39,4 +39,9 @@ public class ProfessionalProfileServiceImpl implements IProfessionalProfileServi
     public Optional<ProfessionalProfile> getById(Integer id) throws Exception {
         return professionalProfileRepository.findById(id);
     }
+
+    @Override
+    public ProfessionalProfile findByNutritionist(Integer nutritionist_id) throws Exception{
+        return professionalProfileRepository.findByNutritionist(nutritionist_id);
+    }
 }

@@ -133,4 +133,22 @@ public class SpecialtyController {
         }
     }
 
+    @GetMapping(value = "/findByNameAndInstitutionName/{name}/{nameInstitution}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Buscar Specialty por Name e Institution name", notes = "Método para encontrar Specialty por Name e Institution name")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Specialty encontrado"),
+            @ApiResponse(code = 404, message = "Specialty no encontrado")
+    })
+    public ResponseEntity<Specialty> findByNameAndInstitutionName(@PathVariable("name") String name, @PathVariable("nameInstitution") String nameInstitution)
+    {
+        try {
+            Specialty specialty = specialtyService.findByNameAndInstitution(name, nameInstitution);
+            if(specialty == null)
+                return new ResponseEntity<Specialty>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Specialty>(specialty, HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<Specialty>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }
