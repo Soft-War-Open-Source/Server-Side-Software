@@ -23,7 +23,7 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/api/professional_profile")
+@RequestMapping("/api/ProfessionalProfiles")
 @Api(tags = "Profesional Profile", value = "Servicio Web RESTful de Profesional_profiles")
 public class ProfessionalProfileController {
 
@@ -182,6 +182,24 @@ public class ProfessionalProfileController {
                 return new ResponseEntity<ProfessionalProfile>(HttpStatus.NOT_FOUND);
             professionalSpecialtiesRepository.delete(professionalSpecialties.get());
             return new ResponseEntity<ProfessionalProfile>(HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<ProfessionalProfile>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping(value = "/searchByNutritionist/{nutritionist_id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Buscar Professional Profile por nutritionist id", notes = "Método para encontrar Professional Profile por nutritionist id")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Professional Profile encontrado"),
+            @ApiResponse(code = 404, message = "Professional Profile no ubicado")
+    })
+    public ResponseEntity<ProfessionalProfile> findByNutritionist(@PathVariable("nutritionist_id") Integer nutritionist_id)
+    {
+        try{
+            ProfessionalProfile professionalProfile = professionalProfileService.findByNutritionist(nutritionist_id);
+            if(professionalProfile == null)
+                return new ResponseEntity<ProfessionalProfile>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<ProfessionalProfile>(professionalProfile, HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<ProfessionalProfile>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
